@@ -1,0 +1,7 @@
+GET http://localhost:7000/movies
+###
+GET http://localhost:7000/movies/1
+###
+GET http://localhost:7000/sessions
+###
+GET http://localhost:7000/sessions/1
