@@ -5,3 +5,54 @@ GET http://localhost:7000/movies/1
 GET http://localhost:7000/sessions
 ###
 GET http://localhost:7000/sessions/1
+###
+POST http://localhost:7000/movies
+Content-Type: application/json
+
+{
+    "movieName": "Interstellar",
+    "description": "When Earth becomes uninhabitable, a team of explorers travels through a wormhole in space in an attempt to ensure humanity's survival on a new planet.",
+    "duration": 169,
+    "ageLimit": false
+}
+###
+POST http://localhost:7000/movies
+Content-Type: application/json
+
+{
+    "movieName": "Dune: Part Two",
+    "description": "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family. Facing a choice between the love of his life and the fate of the universe, he endeavors to prevent a terrible future.",
+    "duration": 166,
+    "ageLimit": false
+}
+###
+POST http://localhost:7000/movies
+Content-Type: application/json
+
+{
+    "movieName": "Oppenheimer",
+    "description": "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb, which changed the course of history forever.",
+    "duration": 180,
+    "ageLimit": true
+}
+###
+POST http://localhost:7000/movies
+Content-Type: application/json
+
+{
+    "movieName": "The Conjuring",
+    "description": "Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their secluded farmhouse, facing the most terrifying case of their lives.",
+    "duration": 112,
+    "ageLimit": true
+}
+###
+PATCH http://localhost:7000/movies/1
+Content-Type: application/json
+
+{
+    "ageLimit": true
+}
+###
+DELETE http://localhost:7000/movies/1
+###
+DELETE http:/localhost:7000/sessions/1

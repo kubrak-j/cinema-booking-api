@@ -58,3 +58,109 @@ app.get(`/sessions/:id`, async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
+
+app.post(`/movies`, async (req, res) => {
+    try {
+        const newMovie = await prisma.movie.create({
+            data: {
+                movieName: req.body.movieName,
+                description: req.body.description,
+                duration: req.body.duration,
+                ageLimit: req.body.ageLimit
+            }
+        });
+        res.status(201).json(newMovie);
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+app.post(`/sessions`, async (req, res) => {
+    try {
+        const newSession = await prisma.session.create({
+            data: {
+                date: req.body.date,
+                movieId: req.body.movieId,
+                isActive: req.body.isActive,
+                bookings: req.body.bookings
+            }
+        });
+        res.status(201).json(newSession);
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+app.patch(`/movies/:id`, async (req, res) => {
+    try {
+        const movieId = Number(req.params.id);
+        const patchedMovie = await prisma.movie.update({
+            where: { id: movieId },
+            data: req.body
+        });
+        res.json(patchedMovie);
+    } catch (error) {
+        if(error instanceof Prisma.PrismaClientKnownRequestError){
+            if(error.code === `P2025`) {
+                return res.status(404).json({ message: "Movie not found" });
+            }
+        }
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+app.patch(`/sessions/:id`, async (req, res) => {
+    try {
+        const sessionId = Number(req.params.id);
+        const patchedSession = await prisma.session.update({
+            where: { id: sessionId },
+            data: req.body
+        });
+        res.json(patchedSession);
+    } catch (error) {
+        if(error instanceof Prisma.PrismaClientKnownRequestError){
+            if(error.code === `P2025`) {
+                return res.status(404).json({ message: "Session not found" });
+            }
+        }
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+app.delete(`/movies/:id`, async (req, res) => {
+    try {
+        const movieId = Number(req.params.id);
+        const deletedMovie = await prisma.movie.delete({
+            where: { 
+                id: movieId
+            },
+        });
+        res.json(deletedMovie);
+    } catch (error) {
+        if(error instanceof Prisma.PrismaClientKnownRequestError){
+            if(error.code === `P2025`) {
+                return res.status(404).json({ message: "Movie not found" });
+            }
+        }
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+app.delete(`/sessions/:id`, async (req, res) => {
+    try {
+        const sessionId = Number(req.params.id);
+        const deletedSession = await prisma.movie.delete({
+            where: { 
+                id: sessionId
+            },
+        });
+        res.json(deletedSession);
+    } catch (error) {
+        if(error instanceof Prisma.PrismaClientKnownRequestError){
+            if(error.code === `P2025`) {
+                return res.status(404).json({ message: "Session not found" });
+            }
+        }
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
