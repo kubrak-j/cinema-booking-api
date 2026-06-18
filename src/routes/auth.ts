@@ -1,0 +1,101 @@
+import { Router } from "express";
+import { prisma } from "../prisma.js";
+import { Prisma } from '@prisma/client';
+import * as z from "zod";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+const router = Router();
+
+const authSchema = z.object({
+    name: z.string(),
+    login: z.string(),
+    email: z.string().trim().email({ message: `Incorrect email format` }),
+    password: z.string(),
+});
+
+const loginSchema = z.object({
+    email: z.string().trim().email(),
+    password: z.string(),
+});
+
+router.post(`/auth/register`, async (req, res) => {
+    try {
+        const parsed = authSchema.safeParse(req.body);
+
+        if(!parsed.success){
+            return res.status(400).json({ message: parsed.error.issues });
+        }
+
+        const foundUser = await prisma.user.findFirst({
+            where: {
+                OR: [
+                    { email: parsed.data.email },
+                    { login: parsed.data.login },
+                ]
+            }
+        });
+
+        if (foundUser !== null) {
+            if (foundUser.email === parsed.data.email) {
+                return res.status(409).json({ message: "Email is already registered" });
+            }
+            if (foundUser.login === parsed.data.login) {
+                return res.status(409).json({ message: "Login is already taken" });
+            }
+        }
+
+        const hashedPassword = await bcrypt.hash(parsed.data.password, 10);
+
+        const newUser = await prisma.user.create({
+            data: {
+                name: parsed.data.name,
+                login: parsed.data.login,
+                email: parsed.data.email,
+                password: hashedPassword,
+            }
+        });
+
+        const { password, ...userWithoutPassword } = newUser;
+
+        res.status(201).json(userWithoutPassword);
+
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+router.post(`/auth/login`, async (req, res) => {
+    try {
+        const parsed = loginSchema.safeParse(req.body);
+        
+        if(!parsed.success){
+            return res.status(400).json({ message: parsed.error.issues });
+        }
+
+        const foundUser = await prisma.user.findUnique({
+            where: {
+                email: parsed.data.email,
+            },
+        });
+
+        if(foundUser === null){
+            return res.status(404).json({ message: `Invalid email` });
+        }
+
+        const isValidPassword = await bcrypt.compare(parsed.data.password, foundUser.password);
+
+        if(!isValidPassword){
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+
+        const { password, ...userWithoutPassword } = foundUser;
+
+        return res.status(200).json(userWithoutPassword);
+
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+export default router;
