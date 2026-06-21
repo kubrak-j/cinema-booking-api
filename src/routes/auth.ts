@@ -89,9 +89,20 @@ router.post(`/auth/login`, async (req, res) => {
             return res.status(401).json({ message: "Invalid email or password" });
         }
 
+        const token = jwt.sign({
+                userId: foundUser.id,
+                role: foundUser.role,
+            }, 
+            process.env.JWT_SECRET as string, 
+            { expiresIn: '24h' }
+        );
+
         const { password, ...userWithoutPassword } = foundUser;
 
-        return res.status(200).json(userWithoutPassword);
+        return res.status(200).json({ 
+            user: userWithoutPassword,
+            token: token, 
+        });
 
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });
