@@ -1,21 +1,10 @@
 import { Router } from "express";
 import { prisma } from "../prisma.js";
 import { Prisma } from '@prisma/client';
-import * as z from "zod";
+import { postSessionSchema, patchSessionSchema } from "../schemas/sessions.schema.js";
+import { authenticate, requireAdmin } from "../middlewares/auth.middleware.js";
 
 const router = Router();
-
-const postSessionSchema = z.object({
-    date: z.coerce.date(),
-    movieId: z.number(),
-    isActive: z.boolean(),
-});
-
-const patchSessionSchema = z.object({
-    date: z.coerce.date(),
-    movieId: z.number(),
-    isActive: z.boolean(),
-}).partial();
 
 router.get(`/`, async (req, res) => {
     try {
@@ -41,7 +30,7 @@ router.get(`/:id`, async (req, res) => {
     }
 });
 
-router.post(`/`, async (req, res) => {
+router.post(`/`, authenticate, requireAdmin, async (req, res) => {
     try {
         const parsed = postSessionSchema.safeParse(req.body);
 
@@ -63,7 +52,7 @@ router.post(`/`, async (req, res) => {
     }
 });
 
-router.patch(`/:id`, async (req, res) => {
+router.patch(`/:id`, authenticate, requireAdmin, async (req, res) => {
     try {
         const sessionId = Number(req.params.id);
         const parsed = patchSessionSchema.safeParse(req.body);
@@ -92,7 +81,7 @@ router.patch(`/:id`, async (req, res) => {
     }
 });
 
-router.delete(`/:id`, async (req, res) => {
+router.delete(`/:id`, authenticate, requireAdmin, async (req, res) => {
     try {
         const sessionId = Number(req.params.id);
         const deletedSession = await prisma.session.delete({

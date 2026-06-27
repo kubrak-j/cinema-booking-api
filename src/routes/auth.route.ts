@@ -1,23 +1,10 @@
 import { Router } from "express";
 import { prisma } from "../prisma.js";
-import { Prisma } from '@prisma/client';
-import * as z from "zod";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { authSchema, loginSchema } from "../schemas/auth.schema.js";
 
 const router = Router();
-
-const authSchema = z.object({
-    name: z.string(),
-    login: z.string(),
-    email: z.string().trim().email({ message: `Incorrect email format` }),
-    password: z.string(),
-});
-
-const loginSchema = z.object({
-    email: z.string().trim().email(),
-    password: z.string(),
-});
 
 router.post(`/auth/register`, async (req, res) => {
     try {

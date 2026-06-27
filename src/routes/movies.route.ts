@@ -1,23 +1,10 @@
 import { Router } from "express";
 import { prisma } from "../prisma.js";
 import { Prisma } from '@prisma/client';
-import * as z from "zod";
+import { postMovieSchema, patchMovieSchema } from "../schemas/movies.schema.js";
+import { authenticate, requireAdmin } from "../middlewares/auth.middleware.js";
 
 const router = Router();
-
-const postMovieSchema = z.object({
-    movieName: z.string(),
-    description: z.string(),
-    duration: z.number(),
-    ageLimit: z.boolean(),
-});
-
-const patchMovieSchema = z.object({
-    movieName: z.string(),
-    description: z.string(),
-    duration: z.number(),
-    ageLimit: z.boolean(),
-}).partial();
 
 router.get(`/`, async (req, res) => {
     try {
@@ -43,7 +30,7 @@ router.get(`/:id`, async (req, res) => {
     }
 });
 
-router.post(`/`, async (req, res) => {
+router.post(`/`, authenticate, requireAdmin, async (req, res) => {
     try {
         const parsed = postMovieSchema.safeParse(req.body);
 
@@ -66,7 +53,7 @@ router.post(`/`, async (req, res) => {
     }
 });
 
-router.patch(`/:id`, async (req, res) => {
+router.patch(`/:id`, authenticate, requireAdmin, async (req, res) => {
     try {
         const movieId = Number(req.params.id);
         const parsed = patchMovieSchema.safeParse(req.body);
@@ -95,7 +82,7 @@ router.patch(`/:id`, async (req, res) => {
     }
 });
 
-router.delete(`/:id`, async (req, res) => {
+router.delete(`/:id`, authenticate, requireAdmin, async (req, res) => {
     try {
         const movieId = Number(req.params.id);
         const deletedMovie = await prisma.movie.delete({

@@ -1,6 +1,6 @@
 import express from "express";
-import moviesRouter from "./routes/movies.js";
-import sessionsRouter from "./routes/sessions.js";
+import moviesRouter from "./routes/movies.route.js";
+import sessionsRouter from "./routes/sessions.route.js";
 
 const app = express();
 app.use(express.json());
