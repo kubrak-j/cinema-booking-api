@@ -6,7 +6,7 @@ import { authSchema, loginSchema } from "../schemas/auth.schema.js";
 
 const router = Router();
 
-router.post(`/auth/register`, async (req, res) => {
+router.post(`/register`, async (req, res) => {
     try {
         const parsed = authSchema.safeParse(req.body);
 
@@ -52,7 +52,7 @@ router.post(`/auth/register`, async (req, res) => {
     }
 });
 
-router.post(`/auth/login`, async (req, res) => {
+router.post(`/login`, async (req, res) => {
     try {
         const parsed = loginSchema.safeParse(req.body);
         

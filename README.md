@@ -16,26 +16,26 @@ A REST API for a cinema booking system. Built to master authentication, relation
 ## ✅ Roadmap
 
 ### Phase 1 — Foundation
-- [ ] Project setup (Express, TypeScript, Prisma, Zod)
-- [ ] Database schema (User, Movie, Session, Booking)
-- [ ] GET /movies — list all movies
-- [ ] GET /sessions — list all sessions
+- [x] Project setup (Express, TypeScript, Prisma, Zod)
+- [x] Database schema (User, Movie, Session, Booking)
+- [x] GET /movies — list all movies
+- [x] GET /sessions — list all sessions
 
 ### Phase 2 — Authentication
-- [ ] POST /auth/register — user registration
-- [ ] POST /auth/login — login, returns JWT token
-- [ ] Auth middleware — protect routes with JWT
+- [x] POST /auth/register — user registration
+- [x] POST /auth/login — login, returns JWT token
+- [x] Auth middleware — protect routes with JWT
 
 ### Phase 3 — Admin Features
-- [ ] POST /movies — admin adds a movie
-- [ ] POST /sessions — admin creates a session
-- [ ] DELETE /movies/:id — admin deletes a movie
-- [ ] Role-based middleware (USER / ADMIN)
+- [x] POST /movies — admin adds a movie
+- [x] POST /sessions — admin creates a session
+- [x] DELETE /movies/:id — admin deletes a movie
+- [x] Role-based middleware (USER / ADMIN)
 
 ### Phase 4 — Booking
-- [ ] POST /bookings — user books a seat
-- [ ] GET /bookings/me — user views their bookings
-- [ ] DELETE /bookings/:id — user cancels a booking
+- [x] POST /bookings — user books a seat
+- [x] GET /bookings/me — user views their bookings
+- [x] DELETE /bookings/:id — user cancels a booking
 - [ ] Seat availability validation
 
 ### Phase 5 — Payments (future)
