@@ -36,7 +36,7 @@ A REST API for a cinema booking system. Built to master authentication, relation
 - [x] POST /bookings — user books a seat
 - [x] GET /bookings/me — user views their bookings
 - [x] DELETE /bookings/:id — user cancels a booking
-- [ ] Seat availability validation
+- [x] Seat availability validation
 
 ### Phase 5 — Payments (future)
 - [ ] Payment integration
