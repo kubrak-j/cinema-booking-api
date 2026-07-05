@@ -31,6 +31,8 @@ model Booking {
     ticket          String
     seat            Int
     isValidTicket   Boolean     @default(true)
+
+    @@unique([sessionId, seat])
 }
 
 model Movie {

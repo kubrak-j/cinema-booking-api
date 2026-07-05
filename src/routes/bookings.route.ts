@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../prisma.js";
+import { Prisma } from '@prisma/client';
 import { authenticate } from "../middlewares/auth.middleware.js";
 import { postBookingSchema } from "../schemas/bookings.schema.js";
 import crypto from "node:crypto";
@@ -84,6 +85,11 @@ router.post(`/`, authenticate, async (req, res) => {
 
         res.status(201).json(newBooking);
     } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+            if (error.code === 'P2002') {
+                return res.status(409).json({ message: "Selected seat is already booked" });
+            }
+        }
         res.status(500).json({ message: "Internal server error" });
     }
 });
