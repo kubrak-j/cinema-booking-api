@@ -14,7 +14,8 @@ router.get(`/`, authenticate, async (req, res) => {
         }
 
         const allUserBookings = await prisma.booking.findMany({
-            where: { userId: req.user.userId }
+            where: { userId: req.user.userId },
+            include: { session: true },
         });
 
         if (!allUserBookings) {
@@ -36,7 +37,8 @@ router.get(`/:id`, authenticate, async (req, res) => {
         const bookingId = Number(req.params.id);
 
         const foundBooking = await prisma.booking.findUnique({
-            where: { id: bookingId }
+            where: { id: bookingId },
+            include: { session: true },
         });
 
         if(foundBooking === null){

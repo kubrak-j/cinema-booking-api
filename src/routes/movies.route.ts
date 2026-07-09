@@ -8,7 +8,10 @@ const router = Router();
 
 router.get(`/`, async (req, res) => {
     try {
-        const allMovies = await prisma.movie.findMany();
+        const allMovies = await prisma.movie.findMany({
+            include: { sessions: true },
+        });
+
         res.json(allMovies);
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });
@@ -18,12 +21,16 @@ router.get(`/`, async (req, res) => {
 router.get(`/:id`, async (req, res) => {
     try {
         const movieId = Number(req.params.id);
+        
         const foundMovie = await prisma.movie.findUnique({
-            where: { id: movieId }
+            where: { id: movieId },
+            include: { sessions: true },
         });
+        
         if(foundMovie === null){
             return res.status(404).json({ message: "Movie not found" });
         }
+        
         res.json(foundMovie);
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });
@@ -88,6 +95,7 @@ router.delete(`/:id`, authenticate, requireAdmin, async (req, res) => {
         const deletedMovie = await prisma.movie.delete({
             where: { id: movieId },
         });
+
         res.json(deletedMovie);
     } catch (error) {
         if(error instanceof Prisma.PrismaClientKnownRequestError){

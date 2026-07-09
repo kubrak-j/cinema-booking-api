@@ -8,7 +8,10 @@ const router = Router();
 
 router.get(`/`, async (req, res) => {
     try {
-        const allSessions = await prisma.session.findMany();
+        const allSessions = await prisma.session.findMany({
+            include: { movie: true }
+        }
+        );
         res.json(allSessions);
     } catch (error) {
         res.status(500).json({ message: "Internal server error"});
@@ -19,7 +22,8 @@ router.get(`/:id`, async (req, res) => {
     try {
         const sessionId = Number(req.params.id);
         const foundSession = await prisma.session.findUnique({
-            where: { id: sessionId }
+            where: { id: sessionId },
+            include: { movie: true },
         });
         if(foundSession === null){
             return res.status(404).json({ message: "Session not found" });
