@@ -1,0 +1,8 @@
+$kind: http-request
+name: /sessions/1 - isActive
+url: "{{baseUrl}}/sessions/1"
+method: PATCH
+body:
+  type: json
+  content: "{\r\n    \"isActive\": \"false\"\r\n}"
+order: 4000

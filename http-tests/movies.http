@@ -1,12 +1,15 @@
-GET http://localhost:7000/movies
-###
-GET http://localhost:7000/movies/1
-###
-GET http://localhost:7000/sessions
-###
-GET http://localhost:7000/sessions/1
-###
-POST http://localhost:7000/movies
+@baseUrl = http://localhost:7000
+@authToken = insert_your_token_here
+
+### Get all movies
+GET {{baseUrl}}/movies
+
+### Get movie by ID
+GET {{baseUrl}}/movies/1
+
+### Create movie: Interstellar
+POST {{baseUrl}}/movies
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
@@ -15,8 +18,10 @@ Content-Type: application/json
     "duration": 169,
     "ageLimit": false
 }
-###
-POST http://localhost:7000/movies
+
+### Create movie: Dune: Part Two
+POST {{baseUrl}}/movies
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
@@ -25,8 +30,10 @@ Content-Type: application/json
     "duration": 166,
     "ageLimit": false
 }
-###
-POST http://localhost:7000/movies
+
+### Create movie: Oppenheimer
+POST {{baseUrl}}/movies
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
@@ -35,8 +42,10 @@ Content-Type: application/json
     "duration": 180,
     "ageLimit": true
 }
-###
-POST http://localhost:7000/movies
+
+### Create movie: The Conjuring
+POST {{baseUrl}}/movies
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
@@ -45,14 +54,16 @@ Content-Type: application/json
     "duration": 112,
     "ageLimit": true
 }
-###
-PATCH http://localhost:7000/movies/1
+
+### Update movie
+PATCH {{baseUrl}}/movies/1
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
     "ageLimit": true
 }
-###
-DELETE http://localhost:7000/movies/1
-###
-DELETE http:/localhost:7000/sessions/1
+
+### Delete movie
+DELETE {{baseUrl}}/movies/1
+Authorization: Bearer {{authToken}}

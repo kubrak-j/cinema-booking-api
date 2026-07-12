@@ -1,0 +1,18 @@
+$kind: http-request
+name: /movies - The Conjuring
+url: "{{baseUrl}}/movies"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"movieName\": \"The Conjuring\",\r
+
+    \    \"description\": \"Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their secluded farmhouse, facing the most terrifying case of their lives.\",\r
+
+    \    \"duration\": 112,\r
+
+    \    \"ageLimit\": true\r
+
+    }"
+order: 6000

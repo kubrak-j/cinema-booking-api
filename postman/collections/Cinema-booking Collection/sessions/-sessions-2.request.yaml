@@ -1,0 +1,16 @@
+$kind: http-request
+name: /sessions
+url: "{{baseUrl}}/sessions"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"date\": \"10.10.2010\",\r
+
+    \    \"movieId\": \"1\",\r
+
+    \    \"isActive\": \"false\"\r
+
+    }"
+order: 3000

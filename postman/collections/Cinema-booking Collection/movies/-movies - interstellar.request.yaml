@@ -1,0 +1,18 @@
+$kind: http-request
+name: /movies - interstellar
+url: "{{baseUrl}}/movies"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"movieName\": \"Interstellar\",\r
+
+    \    \"description\": \"When Earth becomes uninhabitable, a team of explorers travels through a wormhole in space in an attempt to ensure humanity's survival on a new planet.\",\r
+
+    \    \"duration\": 169,\r
+
+    \    \"ageLimit\": false\r
+
+    }"
+order: 3000

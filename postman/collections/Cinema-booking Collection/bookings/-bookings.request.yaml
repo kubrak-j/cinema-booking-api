@@ -1,0 +1,14 @@
+$kind: http-request
+name: /bookings
+url: "{{baseUrl}}/bookings"
+method: GET
+body:
+  type: text
+  content: "{\r
+
+    \    \"email\": \"email\",\r
+
+    \    \"password\": \"1234\"\r
+
+    }"
+order: 1000

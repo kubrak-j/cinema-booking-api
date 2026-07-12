@@ -1,0 +1,5 @@
+$kind: http-request
+name: /session/1
+url: "{{baseUrl}}/sessions/1"
+method: DELETE
+order: 5000

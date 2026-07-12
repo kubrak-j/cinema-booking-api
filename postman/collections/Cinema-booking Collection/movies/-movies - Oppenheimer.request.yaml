@@ -1,0 +1,18 @@
+$kind: http-request
+name: /movies - Oppenheimer
+url: "{{baseUrl}}/movies"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"movieName\": \"Oppenheimer\",\r
+
+    \    \"description\": \"The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb, which changed the course of history forever.\",\r
+
+    \    \"duration\": 180,\r
+
+    \    \"ageLimit\": true\r
+
+    }"
+order: 5000

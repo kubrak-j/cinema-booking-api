@@ -1,0 +1,18 @@
+$kind: http-request
+name: "/movies - Dune: Part Two"
+url: "{{baseUrl}}/movies"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"movieName\": \"Dune: Part Two\",\r
+
+    \    \"description\": \"Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family. Facing a choice between the love of his life and the fate of the universe, he endeavors to prevent a terrible future.\",\r
+
+    \    \"duration\": 166,\r
+
+    \    \"ageLimit\": false\r
+
+    }"
+order: 4000

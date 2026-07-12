@@ -1,0 +1,33 @@
+$kind: collection
+description: |-
+  # Cinema Booking API
+
+  This collection covers the full REST API for a cinema booking platform. It is  
+  organised into four resource groups that reflect the core domain:
+
+  - **Auth** — User registration and login. Use these requests first to obtain a  
+      JWT token, which is stored in the `jwt_token` collection variable and  
+      required by the protected endpoints.
+      
+  - **Movies** — Full CRUD for the movie catalogue. Supports listing all movies,  
+      fetching a single movie by ID, adding new titles (with name, description,  
+      duration, and age-limit flag), updating the age-limit of an existing movie,  
+      and deleting a movie.
+      
+  - **Sessions** — Manage cinema screening sessions. Supports listing all  
+      sessions, retrieving a session by ID, creating a new session (linked to a  
+      movie, with a date and active status), toggling a session's `isActive` flag  
+      via PATCH, and deleting a session.
+      
+  - **Bookings** — Seat reservation workflow. Supports listing all bookings,  
+      retrieving a specific booking by ID, creating a new booking by supplying a  
+      `sessionId` and `seat` number, and cancelling a booking by ID.
+      
+
+  ## ⚙️ Configuration & Variables
+
+  - `{{baseUrl}}` — Managed via the **Postman Environment** file (`Local Docker Env`). It defaults to `http://localhost:7000` (matching the Docker configuration) but can be changed globally in a single field if you run the app on a custom port.
+      
+  - `{{jwt_token}}` — A dynamic **Collection Variable** handled automatically. Once you run the `POST /auth/login` request, a post-response script extracts the JWT and injects it here, granting seamless access to all protected endpoints.
+variables:
+  jwt_token: ""

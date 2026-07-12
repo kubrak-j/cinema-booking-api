@@ -1,0 +1,14 @@
+$kind: http-request
+name: /bookings
+url: "{{baseUrl}}/bookings"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"sessionId\": \"1\",\r
+
+    \    \"seat\": \"43\"\r
+
+    }"
+order: 3000

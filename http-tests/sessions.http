@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:7000
+@authToken = insert_your_token_here
+
+### Get all sessions
+GET {{baseUrl}}/sessions
+
+### Get session by ID
+GET {{baseUrl}}/sessions/1
+
+### Create session
+POST {{baseUrl}}/sessions
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "date": "10.10.2010",
+    "movieId": "1",
+    "isActive": "false"
+}
+
+### Update session
+PATCH {{baseUrl}}/sessions/1
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "isActive": false
+}
+
+### Delete session
+DELETE {{baseUrl}}/sessions/1
+Authorization: Bearer {{authToken}}

@@ -1,0 +1,14 @@
+$kind: http-request
+name: /bookings/1
+url: "{{baseUrl}}/bookings/1"
+method: DELETE
+body:
+  type: text
+  content: "{\r
+
+    \    \"email\": \"email\",\r
+
+    \    \"password\": \"1234\"\r
+
+    }"
+order: 4000

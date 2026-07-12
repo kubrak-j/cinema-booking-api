@@ -14,7 +14,7 @@ app.use(`/sessions`, sessionsRouter);
 app.use(`/auth`, authRouter);
 app.use(`/bookings`, bookingsRouter);
 
-const port = process.env.PORT || 5000;
+const port = Number(process.env.PORT ?? 7000);
 
 app.listen(port, () => {
     console.log(`The server is running`);

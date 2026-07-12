@@ -1,0 +1,4 @@
+name: Local Docker Env
+values:
+  - key: baseUrl
+    value: 'http://localhost:7000'

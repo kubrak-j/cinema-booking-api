@@ -1,0 +1,8 @@
+$kind: http-request
+name: /movies/1 - ageLimit
+url: "{{baseUrl}}/movies/1"
+method: PATCH
+body:
+  type: json
+  content: "{\r\n    \"ageLimit\": true\r\n}"
+order: 7000

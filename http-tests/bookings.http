@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:7000
+@authToken = insert_your_token_here
+
+### Get all bookings
+GET {{baseUrl}}/bookings
+Authorization: Bearer {{authToken}}
+
+### Get booking by ID
+GET {{baseUrl}}/bookings/1
+Authorization: Bearer {{authToken}}
+
+### Create booking
+POST {{baseUrl}}/bookings
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "sessionId": "1",
+    "seat": "43"
+}
+
+### Delete booking
+DELETE {{baseUrl}}/bookings/1
+Authorization: Bearer {{authToken}}

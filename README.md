@@ -146,6 +146,51 @@ Admin endpoints additionally require the `ADMIN` role.
 | POST | /bookings | User | Book a seat |
 | DELETE | /bookings/:id | User | Cancel a booking |
 
+## 🧪 API Testing (Postman)
+
+The project includes a Postman collection under the `postman/` folder so recruiters, reviewers, or collaborators can test the API manually without needing extra setup.
+
+### How to use it
+1. Start the API locally or with Docker.
+2. Open Postman and import the collection from the `postman/collections/` directory.
+3. Set the `{{baseUrl}}` variable to the running API URL, for example:
+   - `http://localhost:7000` for local development
+   - `http://localhost:7000` for Docker-based setup
+4. Register a user through `POST /auth/register` or log in through `POST /auth/login`.
+5. Use the returned JWT token for protected requests such as booking endpoints.
+
+### Notes
+- The collection uses variables rather than hardcoded secrets.
+- No `.env` values, JWT tokens, or database credentials are stored in the collection files.
+- For protected requests, the token should be stored in the Postman variable named `{{jwt_token}}` after login.
+
+### Example request
+```http
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+For secured routes, send:
+```http
+Authorization: Bearer {{jwt_token}}
+```
+### ⚡ Quick Testing via VS Code (REST Client)
+
+If you prefer staying inside your editor, the repository also includes lightweight HTTP test files located in the `http-tests/` directory.
+
+#### How to use:
+1. Install the official **REST Client** extension for VS Code (by Huachao Mao).
+2. Open `http-tests/auth.http` and click the **Send Request** link above the `POST /auth/login` request.
+3. Copy the returned `token` from the response window.
+4. Open any other file (e.g., `bookings.http`, `movies.http`), paste your token into the `@authToken = ...` variable at the top of the file, and save.
+5. Now you can instantly run any protected endpoint directly from VS Code by clicking **Send Request** above it.
+
+
 ## 🗄️ Database Schema
 
 - **User** — registered users with roles (USER / ADMIN)

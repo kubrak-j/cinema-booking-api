@@ -1,0 +1,22 @@
+# Cross-Platform Line Endings Configuration
+# Forces Unix-style line endings (LF) for core text files to prevent issues
+
+# Global default: auto-detect text files and normalize line endings to LF on check-in
+* text=auto eol=lf
+
+# Source Code & Configurations (Text)
+*.ts text
+*.js text
+*.json text
+*.md text
+*.yaml text
+*.yml text
+*.env* text
+
+# Binary Files (Images & Media)
+# Tells Git not to attempt line-ending normalization or diffing for binaries
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary

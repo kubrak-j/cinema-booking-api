@@ -43,7 +43,7 @@ RUN chown -R node:node /usr/src/app
 USER node
 
 # Expose the port that the application listens on.
-EXPOSE 7000
+EXPOSE ${PORT}
 
 # Main entrypoint. When starting the container, Docker executes docker-entrypoint.sh first.
 ENTRYPOINT ["./docker-entrypoint.sh"]

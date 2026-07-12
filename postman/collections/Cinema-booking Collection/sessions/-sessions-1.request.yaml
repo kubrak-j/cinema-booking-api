@@ -1,0 +1,5 @@
+$kind: http-request
+name: /sessions/1
+url: "{{baseUrl}}/sessions/1"
+method: GET
+order: 2000

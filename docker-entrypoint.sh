@@ -6,6 +6,7 @@ if [ ! -f .env ]; then
   echo "Generating .env from environment variables..."
   echo "DATABASE_URL=${DATABASE_URL}" > .env
   echo "JWT_SECRET=${JWT_SECRET}" >> .env
+  echo "PORT=${PORT}" >> .env
 fi
 
 # Run Prisma migrations
