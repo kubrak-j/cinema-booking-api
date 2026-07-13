@@ -3,7 +3,7 @@ import { prisma } from "../prisma.js";
 import { Prisma } from '@prisma/client';
 import { authenticate } from "../middlewares/auth.middleware.js";
 import { postBookingSchema } from "../schemas/bookings.schema.js";
-import crypto from "node:crypto";
+import { generateTicket } from "../utils/ticket.js";
 
 const router = Router();
 
@@ -63,24 +63,11 @@ router.post(`/`, authenticate, async (req, res) => {
             return res.status(400).json({ message: parsed.error.issues });
         }
 
-        const foundSeat = await prisma.booking.findFirst({
-            where: {
-                seat: parsed.data.seat,
-                sessionId: parsed.data.sessionId
-            }
-        });
-
-        if(foundSeat){
-            return res.status(409).json({ message: `Selected seat is already booked` });
-        }
-
-        const ticketCode = `TICKET-${crypto.randomBytes(4).toString('hex')}`;
-
         const newBooking = await prisma.booking.create({
             data: {
                 sessionId: parsed.data.sessionId,
                 userId: req.user.userId,
-                ticket: ticketCode,
+                ticket: generateTicket(parsed.data.sessionId, parsed.data.seat),
                 seat: parsed.data.seat
             }
         });

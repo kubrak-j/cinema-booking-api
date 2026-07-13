@@ -20,14 +20,16 @@ Desktop.ini
 
 # Dependencies and Packages
 node_modules/
+**/node_modules/
 .npm/
 .yarn/cache/
 .pnpm-store/
 
 # Build and TypeScript Output
 dist/
+**/dist/
 build/
-*.tsbuildinfo
+**/build/
 out/
 bin/
 *.tsbuildinfo
@@ -42,8 +44,11 @@ coverage/
 
 # Environment variables
 .env
+**/.env
+**/.env.local
+**/.env.*.local
+**/.env.test
 .env.local
-.env.*
 .env.*.local
 .env.test
 secret.json
@@ -53,6 +58,7 @@ config.json
 
 # Database and Prisma
 .prisma/
+**/prisma/client/
 src/generated/prisma/
 *.sqlite
 *.sqlite3
@@ -80,5 +86,6 @@ docker-compose.override.yml
 
 # Local Tools (Postman, API Clients)
 .postman/
+**/ .postman/
 .bruno/
 .http-client/

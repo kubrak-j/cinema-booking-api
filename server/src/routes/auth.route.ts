@@ -3,6 +3,7 @@ import { prisma } from "../prisma.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { authSchema, loginSchema } from "../schemas/auth.schema.js";
+import { env } from "../config/env.js";
 
 const router = Router();
 
@@ -80,7 +81,7 @@ router.post(`/login`, async (req, res) => {
                 userId: foundUser.id,
                 role: foundUser.role,
             }, 
-            process.env.JWT_SECRET as string, 
+            env.JWT_SECRET, 
             { expiresIn: '24h' }
         );
 

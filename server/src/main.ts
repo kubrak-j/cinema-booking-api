@@ -3,9 +3,7 @@ import moviesRouter from "./routes/movies.route.js";
 import sessionsRouter from "./routes/sessions.route.js";
 import authRouter from "./routes/auth.route.js";
 import bookingsRouter from "./routes/bookings.route.js";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { env } from "./config/env.js";
 
 const app = express();
 app.use(express.json());
@@ -14,9 +12,9 @@ app.use(`/sessions`, sessionsRouter);
 app.use(`/auth`, authRouter);
 app.use(`/bookings`, bookingsRouter);
 
-const port = Number(process.env.PORT ?? 7000);
+const port = env.PORT;
 
 app.listen(port, () => {
-    console.log(`The server is running`);
+    console.log("The server is running");
     console.log(`listening on port ${port}`);
 });

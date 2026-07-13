@@ -57,17 +57,6 @@ http-tests/
 *.http
 
 # Docker Orchestration (Optional to ignore)
-Dockerfile*
-docker-compose*
-compose.y*ml
-
-# Infrastructure & orchestration configures
-#**/secrets.dev.yaml
-#**/values.dev.yaml
-#**/charts
-
-# Local caches & node runtime dependencies
-#**/.next
-#**/.cache
-#**/obj
-#**/npm-debug.log
+# Dockerfile*
+# docker-compose*
+# compose.y*ml

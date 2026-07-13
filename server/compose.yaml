@@ -7,6 +7,9 @@
 # You can add other services your application may depend on here, such as a
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
+
+name: cinema-booking-api
+
 services:
   db:
     image: postgres:17-alpine
@@ -32,7 +35,8 @@ services:
       NODE_ENV: production
       PORT: ${PORT}
       DATABASE_URL: "postgresql://postgres@db:5432/cinema_booking_db?schema=public"
-      JWT_SECRET: "${JWT_SECRET}"
+      JWT_SECRET: ${JWT_SECRET}
+      TICKET_SECRET: ${TICKET_SECRET}
     ports:
       - "${PORT}:${PORT}"
     depends_on:
