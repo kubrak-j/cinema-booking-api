@@ -48,9 +48,11 @@ coverage/
 **/.env.local
 **/.env.*.local
 **/.env.test
+**/.env.docker
 .env.local
 .env.*.local
 .env.test
+.env.docker
 secret.json
 config.json
 *.pem

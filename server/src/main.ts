@@ -15,6 +15,5 @@ app.use(`/bookings`, bookingsRouter);
 const port = env.PORT;
 
 app.listen(port, () => {
-    console.log("The server is running");
-    console.log(`listening on port ${port}`);
+    console.log(`Server started on port ${port}`);
 });
