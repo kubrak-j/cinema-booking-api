@@ -1,7 +1,8 @@
 import { type Request, type Response, type NextFunction } from "express";
-import type { Role } from "@prisma/client";
 import jwt from "jsonwebtoken";
 import { env } from "../config/env.js";
+
+type UserRole = "USER" | "ADMIN";
 
 export function authenticate (req: Request, res: Response, next: NextFunction){
     try {
@@ -17,7 +18,7 @@ export function authenticate (req: Request, res: Response, next: NextFunction){
             return res.status(401).json({ message: "Unauthorized" });
         }
 
-        const decoded = jwt.verify(token, env.JWT_SECRET) as { userId: number; role: Role };
+        const decoded = jwt.verify(token, env.JWT_SECRET) as { userId: number; role: UserRole };
         
         req.user = decoded;
 
