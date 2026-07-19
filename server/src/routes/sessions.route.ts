@@ -9,7 +9,14 @@ const router = Router();
 router.get(`/`, async (req, res) => {
     try {
         const allSessions = await prisma.session.findMany({
-            include: { movie: true }
+            include: {
+                movie: true,
+                bookings: {
+                    select: {
+                        seat: true
+                    }
+                }
+            }
         }
         );
         res.json(allSessions);
@@ -23,7 +30,14 @@ router.get(`/:id`, async (req, res) => {
         const sessionId = Number(req.params.id);
         const foundSession = await prisma.session.findUnique({
             where: { id: sessionId },
-            include: { movie: true },
+            include: {
+                movie: true,
+                bookings: {
+                    select: {
+                        seat: true
+                    }
+                }
+            }
         });
         if(foundSession === null){
             return res.status(404).json({ message: "Session not found" });
