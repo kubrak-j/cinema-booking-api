@@ -3,9 +3,11 @@ import moviesRouter from "./routes/movies.route.js";
 import sessionsRouter from "./routes/sessions.route.js";
 import authRouter from "./routes/auth.route.js";
 import bookingsRouter from "./routes/bookings.route.js";
+import cors from "cors";
 import { env } from "./config/env.js";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(`/movies`, moviesRouter);
 app.use(`/sessions`, sessionsRouter);
