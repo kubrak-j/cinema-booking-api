@@ -13,7 +13,7 @@
     "db:seed": "npx prisma db seed"
   },
   "prisma": {
-    "seed": "tsx prisma/seeds/main.seed.ts"
+    "seed": "tsx prisma/seed/main.seed.ts"
   },
   "keywords": [],
   "author": "Kubrak Jaroslav",

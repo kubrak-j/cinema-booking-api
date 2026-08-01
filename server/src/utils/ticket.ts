@@ -1,17 +1,22 @@
 import crypto from 'crypto';
 import { env } from '../config/env.js';
 
-const TICKET_SECRET = env.TICKET_SECRET;
+export function generateTicket(sessionId: number, hallName: string, row: number, number: number): string {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ123456789';
+    let randomTail = '';
+    for (let i = 0; i < 4; i++) {
+        const randomIndex = crypto.randomInt(0, chars.length);
+        randomTail += chars[randomIndex];
+    }
 
-export function generateTicket(sessionId: number, seat: number){
-    const baseInfo = `TKT-SESS${sessionId}-SEAT${seat}`;
-
-    const hash = crypto
-        .createHmac('sha256', TICKET_SECRET)
+    const baseInfo = `TKT-S${sessionId}-${hallName.toUpperCase()}-R${row}N${number}-${randomTail}`;
+    
+    const signature = crypto
+        .createHmac('sha256', env.TICKET_SECRET)
         .update(baseInfo)
-        .digest('hex');
-
-    const hashTail = hash.substring(0, 4);
-
-    return `${baseInfo}-${hashTail}`;
+        .digest('hex')
+        .substring(0, 4)
+        .toUpperCase();
+    
+    return `${baseInfo}-${signature}`;
 }
