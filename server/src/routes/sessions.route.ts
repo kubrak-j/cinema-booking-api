@@ -11,14 +11,9 @@ router.get(`/`, async (req, res) => {
         const allSessions = await prisma.session.findMany({
             include: {
                 movie: true,
-                bookings: {
-                    select: {
-                        seat: true
-                    }
-                }
+                bookings: { select: { seat: true } }
             }
-        }
-        );
+        });
         res.json(allSessions);
     } catch (error) {
         res.status(500).json({ message: "Internal server error"});
@@ -32,11 +27,7 @@ router.get(`/:id`, async (req, res) => {
             where: { id: sessionId },
             include: {
                 movie: true,
-                bookings: {
-                    select: {
-                        seat: true
-                    }
-                }
+                bookings: { select: { seat: true } }
             }
         });
         if(foundSession === null){
@@ -58,9 +49,11 @@ router.post(`/`, authenticate, requireAdmin, async (req, res) => {
 
         const newSession = await prisma.session.create({
             data: {
-                date: parsed.data.date,
+                startTime: parsed.data.startTime,
                 movieId: parsed.data.movieId,
-                isActive: parsed.data.isActive,
+                hallId: parsed.data.hallId,
+                status: parsed.data.status,
+                basePrice: parsed.data.basePrice
             }
         });
 

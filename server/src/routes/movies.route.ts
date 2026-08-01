@@ -22,16 +22,16 @@ router.get(`/:id`, async (req, res) => {
     try {
         const movieId = Number(req.params.id);
         
-        const foundMovie = await prisma.movie.findUnique({
+        const existingMovie = await prisma.movie.findUnique({
             where: { id: movieId },
             include: { sessions: true },
         });
         
-        if(foundMovie === null){
+        if(existingMovie === null){
             return res.status(404).json({ message: "Movie not found" });
         }
         
-        res.json(foundMovie);
+        res.json(existingMovie);
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });
     }
@@ -47,10 +47,10 @@ router.post(`/`, authenticate, requireAdmin, async (req, res) => {
 
         const newMovie = await prisma.movie.create({
             data: {
-                movieName: parsed.data.movieName,
+                title: parsed.data.title,
                 description: parsed.data.description,
                 duration: parsed.data.duration,
-                ageLimit: parsed.data.ageLimit
+                ageRating: parsed.data.ageRating
             }
         });
 

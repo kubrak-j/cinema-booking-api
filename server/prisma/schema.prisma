@@ -1,11 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client-js"
-  // output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -13,47 +7,100 @@ datasource db {
 }
 
 model User {
-    id              Int         @id     @default(autoincrement())
-    name            String
-    login           String      @unique
-    role            Role        @default(USER)
-    email           String      @unique
-    password        String
-    Booking         Booking[]
-}
-
-model Booking {
-    id              Int         @id     @default(autoincrement())
-    sessionId       Int
-    session         Session     @relation(fields: [sessionId], references: [id])
-    userId          Int
-    user            User        @relation(fields: [userId], references: [id])
-    ticket          String
-    seat            Int
-    isValidTicket   Boolean     @default(true)
-
-    @@unique([sessionId, seat])
+  id           Int           @id                      @default(autoincrement())
+  name         String
+  login        String        @unique
+  email        String        @unique
+  password     String
+  role         Role          @default(USER)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  bookings     Booking[]
 }
 
 model Movie {
-    id              Int         @id     @default(autoincrement())
-    movieName       String
-    description     String
-    duration        Int
-    ageLimit        Boolean
-    sessions        Session[]
+  id           Int           @id                      @default(autoincrement())
+  title        String
+  description  String        @db.Text
+  duration     Int
+  ageRating    AgeRating     @default(PG13)
+  createdAt    DateTime      @default(now())
+  sessions     Session[]
+}
+
+model Hall {
+  id           Int           @id                      @default(autoincrement())
+  name         String        @unique
+  seats        Seat[]
+  sessions     Session[]
+}
+
+model Seat {
+  id           Int            @id                     @default(autoincrement())
+  row          Int
+  number       Int
+  hallId       Int
+  hall         Hall           @relation(fields: [hallId], references: [id], onDelete: Restrict)
+  seatCategory SeatCategory   @default(STANDARD)
+  bookings     Booking[]
+  @@unique([row, number, hallId])
 }
 
 model Session {
-    id              Int         @id     @default(autoincrement())
-    date            DateTime
-    movieId         Int
-    movie           Movie       @relation(fields: [movieId], references: [id])
-    isActive        Boolean
-    bookings        Booking[]
+  id           Int            @id                     @default(autoincrement())
+  startTime    DateTime       @db.Timestamptz
+  movieId      Int
+  movie        Movie          @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  hallId       Int
+  hall         Hall           @relation(fields: [hallId], references: [id], onDelete: Restrict)
+  status       SessionStatus  @default(SCHEDULED)
+  basePrice    Decimal        @db.Decimal(10, 2)
+  bookings     Booking[]
+}
+
+model Booking {
+  id           Int            @id                     @default(autoincrement())
+  ticketCode   String         @unique
+  status       BookingStatus  @default(PENDING)
+  totalPrice   Decimal        @db.Decimal(10, 2)
+  userId       Int
+  user         User           @relation(fields: [userId], references: [id], onDelete: Restrict)
+  sessionId    Int
+  session      Session        @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  seatId       Int
+  seat         Seat           @relation(fields: [seatId], references: [id], onDelete: Restrict)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  @@unique([sessionId, seatId])
 }
 
 enum Role {
-    USER
-    ADMIN
+  USER
+  ADMIN
+  CASHIER
+}
+
+enum SeatCategory {
+  STANDARD
+  VIP
+}
+
+enum AgeRating {
+  G
+  PG
+  PG13
+  R
+  NC17
+}
+
+enum SessionStatus {
+  SCHEDULED
+  CANCELLED
+  FINISHED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
 }

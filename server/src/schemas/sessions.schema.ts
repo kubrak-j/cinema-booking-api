@@ -1,13 +1,18 @@
 import * as z from "zod";
+import { SessionStatus } from "@prisma/client";
 
 export const postSessionSchema = z.object({
-    date: z.coerce.date(),
+    startTime: z.coerce.date(),
     movieId: z.number(),
-    isActive: z.boolean(),
+    hallId: z.number(),
+    status: z.nativeEnum(SessionStatus),
+    basePrice: z.number()
 });
 
 export const patchSessionSchema = z.object({
-    date: z.coerce.date(),
+    startTime: z.coerce.date(),
     movieId: z.number(),
-    isActive: z.boolean(),
+    hallId: z.number(),
+    status: z.nativeEnum(SessionStatus),
+    basePrice: z.number()
 }).partial();

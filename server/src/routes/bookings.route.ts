@@ -4,6 +4,7 @@ import { Prisma } from '@prisma/client';
 import { authenticate } from "../middlewares/auth.middleware.js";
 import { postBookingSchema } from "../schemas/bookings.schema.js";
 import { generateTicket } from "../utils/ticket.js";
+import { priceCalculate } from "../utils/pricing.js";
 
 const router = Router();
 
@@ -36,16 +37,20 @@ router.get(`/:id`, authenticate, async (req, res) => {
 
         const bookingId = Number(req.params.id);
 
-        const foundBooking = await prisma.booking.findUnique({
+        const existingBooking = await prisma.booking.findUnique({
             where: { id: bookingId },
             include: { session: true },
         });
 
-        if(foundBooking === null){
+        if(existingBooking === null){
             return res.status(404).json({ message: "Booking not found" });
         }
 
-        res.status(200).json(foundBooking);
+        if (req.user.role !== "ADMIN" && existingBooking.userId !== req.user.userId) {
+            return res.status(403).json({ message: "Forbidden" });
+        }
+
+        res.status(200).json(existingBooking);
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });
     }
@@ -63,12 +68,43 @@ router.post(`/`, authenticate, async (req, res) => {
             return res.status(400).json({ message: parsed.error.issues });
         }
 
+        const { sessionId, row, number } = parsed.data;
+
+        const session = await prisma.session.findUnique({
+            where: { id: sessionId },
+            include: { hall: true }
+        });
+
+        if (!session) {
+            return res.status(404).json({ message: "Session not found" });
+        }
+
+        const seat = await prisma.seat.findUnique({
+            where: {
+                row_number_hallId: {
+                    row: row,
+                    number: number,
+                    hallId: session.hallId
+                }
+            }
+        });
+
+        if (!seat) {
+            return res.status(404).json({ message: "Seat not found in this hall" });
+        }
+
+        const calculatedPrice = priceCalculate(Number(session.basePrice), seat.seatCategory);
+
+        const ticketCode = generateTicket(session.id, session.hall.name, seat.number, seat.row);
+
         const newBooking = await prisma.booking.create({
             data: {
-                sessionId: parsed.data.sessionId,
+                ticketCode: ticketCode,
+                totalPrice: new Prisma.Decimal(calculatedPrice),
                 userId: req.user.userId,
-                ticket: generateTicket(parsed.data.sessionId, parsed.data.seat),
-                seat: parsed.data.seat
+                sessionId: session.id,
+                seatId: seat.id,
+                status: "PENDING"
             }
         });
 
@@ -91,15 +127,15 @@ router.delete(`/:id`, authenticate, async (req, res) => {
 
         const bookingId = Number(req.params.id);
 
-        const foundBooking = await prisma.booking.findUnique({
+        const existingBooking = await prisma.booking.findUnique({
             where: { id: bookingId }
         });
 
-        if (!foundBooking) {
+        if (!existingBooking) {
             return res.status(404).json({ message: "Booking not found" });
         }
 
-        if (foundBooking.userId !== req.user.userId) {
+        if (existingBooking.userId !== req.user.userId) {
             return res.status(403).json({ message: "Forbidden" });
         }
 

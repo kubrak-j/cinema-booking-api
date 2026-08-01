@@ -2,7 +2,7 @@ import { type Request, type Response, type NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { env } from "../config/env.js";
 
-type UserRole = "USER" | "ADMIN";
+type UserRole = "USER" | "ADMIN" | "CASHIER";
 
 export function authenticate (req: Request, res: Response, next: NextFunction){
     try {
@@ -26,6 +26,14 @@ export function authenticate (req: Request, res: Response, next: NextFunction){
     } catch (error) {
         return res.status(401).json({ message: "Invalid or expired token" });
     }
+}
+
+export function requireCashier(req: Request, res: Response, next: NextFunction){
+    if (req.user?.role !== 'CASHIER') {
+        return res.status(403).json({ message: "Forbidden" });
+    }
+        
+    next();
 }
 
 export function requireAdmin (req: Request, res: Response, next: NextFunction){

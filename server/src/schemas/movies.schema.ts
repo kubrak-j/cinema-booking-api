@@ -1,15 +1,16 @@
 import * as z from "zod";
+import { AgeRating } from "@prisma/client";
 
 export const postMovieSchema = z.object({
-    movieName: z.string(),
+    title: z.string(),
     description: z.string(),
     duration: z.number(),
-    ageLimit: z.boolean(),
+    ageRating: z.nativeEnum(AgeRating)
 });
 
 export const patchMovieSchema = z.object({
-    movieName: z.string(),
+    title: z.string(),
     description: z.string(),
     duration: z.number(),
-    ageLimit: z.boolean(),
+    ageRating: z.nativeEnum(AgeRating)
 }).partial();

@@ -15,7 +15,7 @@ router.post(`/register`, async (req, res) => {
             return res.status(400).json({ message: parsed.error.issues });
         }
 
-        const foundUser = await prisma.user.findFirst({
+        const existingUser = await prisma.user.findFirst({
             where: {
                 OR: [
                     { email: parsed.data.email },
@@ -24,11 +24,11 @@ router.post(`/register`, async (req, res) => {
             }
         });
 
-        if (foundUser !== null) {
-            if (foundUser.email === parsed.data.email) {
+        if (existingUser !== null) {
+            if (existingUser.email === parsed.data.email) {
                 return res.status(409).json({ message: "Email is already registered" });
             }
-            if (foundUser.login === parsed.data.login) {
+            if (existingUser.login === parsed.data.login) {
                 return res.status(409).json({ message: "Login is already taken" });
             }
         }
@@ -61,31 +61,29 @@ router.post(`/login`, async (req, res) => {
             return res.status(400).json({ message: parsed.error.issues });
         }
 
-        const foundUser = await prisma.user.findUnique({
-            where: {
-                email: parsed.data.email,
-            },
+        const existingUser = await prisma.user.findUnique({
+            where: { email: parsed.data.email },
         });
 
-        if(foundUser === null){
-            return res.status(404).json({ message: `Invalid email` });
+        if(existingUser === null){
+            return res.status(401).json({ message: `Invalid email or password` });
         }
 
-        const isValidPassword = await bcrypt.compare(parsed.data.password, foundUser.password);
+        const isValidPassword = await bcrypt.compare(parsed.data.password, existingUser.password);
 
         if(!isValidPassword){
             return res.status(401).json({ message: "Invalid email or password" });
         }
 
         const token = jwt.sign({
-                userId: foundUser.id,
-                role: foundUser.role,
+                userId: existingUser.id,
+                role: existingUser.role,
             }, 
             env.JWT_SECRET, 
             { expiresIn: '24h' }
         );
 
-        const { password, ...userWithoutPassword } = foundUser;
+        const { password, ...userWithoutPassword } = existingUser;
 
         return res.status(200).json({ 
             user: userWithoutPassword,
