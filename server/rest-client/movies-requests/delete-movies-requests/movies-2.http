@@ -1,0 +1,6 @@
+@baseUrl = http://localhost:7000
+@authToken = insert_your_token_here
+
+### Delete movie
+Authorization: Bearer {{authToken}}
+DELETE {{baseUrl}}/movies/2

@@ -1,0 +1,9 @@
+@baseUrl = http://localhost:7000
+@authToken = insert_your_token_here
+
+### Update movie
+PATCH {{baseUrl}}/movies/2
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{"duration": 142}

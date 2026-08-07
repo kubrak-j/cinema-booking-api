@@ -1,0 +1,1234 @@
+{
+  "info": {
+    "_postman_id": "bf959539-1453-466e-ba8c-c31aeaad87e9",
+    "name": "Cinema-booking Collection",
+    "description": "# Cinema Booking API\n\nThis collection covers the full REST API for a cinema booking platform. It is  \norganised into four resource groups that reflect the core domain:\n\n- **Auth** — User registration and login. Use these requests first to obtain a  \n    JWT token, which is stored in the `jwt_token` collection variable and  \n    required by the protected endpoints.\n    \n- **Movies** — Full CRUD for the movie catalogue. Supports listing all movies,  \n    fetching a single movie by ID, adding new titles (with name, description,  \n    duration, and age-limit flag), updating the age-limit of an existing movie,  \n    and deleting a movie.\n    \n- **Sessions** — Manage cinema screening sessions. Supports listing all  \n    sessions, retrieving a session by ID, creating a new session (linked to a  \n    movie, with a date and active status), toggling a session's `isActive` flag  \n    via PATCH, and deleting a session.\n    \n- **Bookings** — Seat reservation workflow. Supports listing all bookings,  \n    retrieving a specific booking by ID, creating a new booking by supplying a  \n    `sessionId` and `seat` number, and cancelling a booking by ID.\n    \n\n## ⚙️ Configuration & Variables\n\n- `{{baseUrl}}` — Managed via the **Postman Environment** file (`Local Docker Env`). It defaults to `http://localhost:7000` (matching the Docker configuration) but can be changed globally in a single field if you run the app on a custom port.\n    \n- `{{jwt_token}}` — A dynamic **Collection Variable** handled automatically. Once you run the `POST /auth/login` request, a post-response script extracts the JWT and injects it here, granting seamless access to all protected endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54985562",
+    "_collection_link": "https://go.postman.co/collection/54985562-bf959539-1453-466e-ba8c-c31aeaad87e9?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "movies",
+      "item": [
+        {
+          "name": "Get movies requests",
+          "item": [
+            {
+              "name": "/movies",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/1",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Post movies requests",
+          "item": [
+            {
+              "name": "/movies - The Shawshank Redemption",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"The Shawshank Redemption\",\r\n    \"description\": \"A prominent banker is wrongly convicted of murder and sentenced to life imprisonment at the Shawshank prison. Over the years, he forms a deep friendship with a fellow inmate and finds ways to retain his humanity and hope.\",\r\n    \"duration\": 142,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Gladiator",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Gladiator\",\r\n    \"description\": \"A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery. He rises through the ranks of the gladiatorial arena to face his enemy.\",\r\n    \"duration\": 155,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Avatar",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Avatar\",\r\n    \"description\": \"A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.\",\r\n    \"duration\": 162,\r\n    \"ageRating\": \"PG13\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - The Lion King",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"The Lion King\",\r\n    \"description\": \"A young lion prince flees his kingdom after the murder of his father, only to learn the true meaning of responsibility and bravery when he returns to reclaim his throne.\",\r\n    \"duration\": 88,\r\n    \"ageRating\": \"G\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - The Matrix",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"The Matrix\",\r\n    \"description\": \"A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.\",\r\n    \"duration\": 136,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Spider-Man: Into the Spider-Verse",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Spider-Man: Into the Spider-Verse\",\r\n    \"description\": \"Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.\",\r\n    \"duration\": 117,\r\n    \"ageRating\": \"PG\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Fight Club",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Fight Club\",\r\n    \"description\": \"An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.\",\r\n    \"duration\": 139,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Jurassic Park",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Jurassic Park\",\r\n    \"description\": \"A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.\",\r\n    \"duration\": 127,\r\n    \"ageRating\": \"PG13\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Mad Max: Fury Road",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Mad Max: Fury Road\",\r\n    \"description\": \"In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland with the aid of a group of female prisoners, a psychotic worshiper, and a drifter named Max.\",\r\n    \"duration\": 120,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - The Grand Budapest Hotel",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"The Grand Budapest Hotel\",\r\n    \"description\": \"A writer encounters the owner of a declining high-class hotel, who tells him of his early years as a lobby boy in the hotel's glorious years under an exceptional concierge.\",\r\n    \"duration\": 99,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Patch movies requests",
+          "item": [
+            {
+              "name": "/movies/1 - ageLimit",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"ageRating\": \"R\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/2 - duration",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"duration\": 142}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "2"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/2\" -H \"Content-Type: application/json\" -d \"{\\\"duration\\\": 142}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/3 - ageRating",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"ageRating\": \"R\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "3"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/3\" -H \"Content-Type: application/json\" -d \"{\\\"ageRating\\\": \\\"R\\\"}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/4 - duration",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"duration\": 162}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "4"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/4\" -H \"Content-Type: application/json\" -d \"{\\\"duration\\\": 162}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/5 - ageRating",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"ageRating\": \"G\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "5"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/5\" -H \"Content-Type: application/json\" -d \"{\\\"ageRating\\\": \\\"G\\\"}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/6 - duration",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"duration\": 136}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/6",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "6"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/6\" -H \"Content-Type: application/json\" -d \"{\\\"duration\\\": 136}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/7 - ageRating",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"ageRating\": \"PG\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "7"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/7\" -H \"Content-Type: application/json\" -d \"{\\\"ageRating\\\": \\\"PG\\\"}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/8 - ageLimit",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"ageLimit\": true}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "8"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/8\" -H \"Content-Type: application/json\" -d \"{\\\"ageLimit\\\": true}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/9 - duration",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"duration\": 127}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "9"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/9\" -H \"Content-Type: application/json\" -d \"{\\\"duration\\\": 127}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/10 - ageRating",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"ageRating\": \"R\"}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "10"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/10\" -H \"Content-Type: application/json\" -d \"{\\\"ageRating\\\": \\\"R\\\"}\""
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Delete movies requests",
+          "item": [
+            {
+              "name": "/movies/1",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/2",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "2"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/2"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/3",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "3"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/3"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/4",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "4"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/4"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/5",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "5"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/5"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/6",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/6",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "6"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/6"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/7",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "7"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/7"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/8",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "8"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/8"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/9",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "9"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/9"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/10",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "10"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/10"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sessions",
+      "item": [
+        {
+          "name": "/sessions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sessions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sessions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/sessions/1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sessions/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sessions",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/sessions - 2026.07.20   14:30",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"date\": \"2026-07-20T14:30:00Z\",\r\n    \"movieId\": 1,\r\n    \"isActive\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sessions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sessions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/session - 2026.07.21   21:15",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"date\": \"2026-07-20T21:15:00Z\",\r\n    \"movieId\": 2,\r\n    \"isActive\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sessions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sessions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/session - 2026.07.21   12:30",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"date\": \"2026-07-21T12:30:00Z\",\r\n    \"movieId\": 3,\r\n    \"isActive\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sessions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sessions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/sessions - 2026.07.20   18:00",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"date\": \"2026-07-20T18:00:00Z\",\r\n    \"movieId\": 4,\r\n    \"isActive\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sessions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sessions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/sessions/1 - isActive",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"isActive\": \"false\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/sessions/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sessions",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/session/1",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/sessions/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sessions",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "bookings",
+      "item": [
+        {
+          "name": "/bookings",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"email\",\r\n    \"password\": \"1234\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/bookings/1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"email\",\r\n    \"password\": \"1234\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/bookings/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/bookings",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"sessionId\": \"1\",\r\n    \"seat\": \"43\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/bookings/1",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"email\",\r\n    \"password\": \"1234\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/bookings/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bookings",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "/auth/register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"test_user\",\r\n    \"login\": \"some_login\",\r\n    \"email\": \"testuser123@gmail.com\",\r\n    \"password\": \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/auth/login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"testuser123@gmail.com\",\r\n    \"password\": \"password123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "jwt_token",
+      "value": ""
+    }
+  ]
+}

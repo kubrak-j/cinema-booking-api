@@ -1,21 +1,17 @@
-import express from "express";
-import moviesRouter from "./routes/movies.route.js";
-import sessionsRouter from "./routes/sessions.route.js";
-import authRouter from "./routes/auth.route.js";
-import bookingsRouter from "./routes/bookings.route.js";
-import cors from "cors";
-import { env } from "./config/env.js";
+import 'dotenv/config';
+import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
+import { AppModule } from './app.module.js';
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(`/movies`, moviesRouter);
-app.use(`/sessions`, sessionsRouter);
-app.use(`/auth`, authRouter);
-app.use(`/bookings`, bookingsRouter);
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
 
-const port = env.PORT;
+    app.enableCors();
+    app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
 
-app.listen(port, () => {
+    const port = process.env.PORT ?? 3000;
+    await app.listen(port);
     console.log(`Server started on port ${port}`);
-});
+}
+
+bootstrap();

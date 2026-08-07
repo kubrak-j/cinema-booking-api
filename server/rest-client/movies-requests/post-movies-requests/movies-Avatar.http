@@ -1,0 +1,14 @@
+@baseUrl = http://localhost:7000
+@authToken = insert_your_token_here
+
+### Create movie: Avatar
+POST {{baseUrl}}/movies
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "title": "Avatar",
+    "description": "A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
+    "duration": 162,
+    "ageRating": "PG13"
+}

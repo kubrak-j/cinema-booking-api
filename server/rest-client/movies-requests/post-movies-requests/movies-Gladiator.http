@@ -1,0 +1,14 @@
+@baseUrl = http://localhost:7000
+@authToken = insert_your_token_here
+
+### Create movie: Gladiator
+POST {{baseUrl}}/movies
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "title": "Gladiator",
+    "description": "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery. He rises through the ranks of the gladiatorial arena to face his enemy.",
+    "duration": 155,
+    "ageRating": "R"
+}

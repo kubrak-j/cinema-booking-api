@@ -1,0 +1,5 @@
+@baseUrl = http://localhost:7000
+@authToken = insert_your_token_here
+
+### Get movie by ID
+GET {{baseUrl}}/movies/1
