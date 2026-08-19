@@ -26,6 +26,7 @@ export class SessionsController {
     patch(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateSessionDto) {
         return this.sessionsService.patch(id, dto);
     }
+    
     @Delete(':id')
     delete(@Param('id', ParseIntPipe) id: number ){
         return this.sessionsService.delete(id);
