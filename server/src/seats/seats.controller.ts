@@ -2,7 +2,10 @@ import { Controller, Get, Post, Patch, Delete, Param, Body, ParseIntPipe } from 
 import { SeatsService } from "./seats.service.js";
 import { CreateSeatDto } from "./dto/create-seat.dto.js";
 import { UpdateSeatDto } from "./dto/update-seat.dto.js";
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 
+@UseGuards(JwtAuthGuard)
 @Controller('halls/:hallId/seats')
 export class SeatsController {
     constructor(private readonly seatsService: SeatsService) {}

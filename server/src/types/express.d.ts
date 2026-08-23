@@ -8,5 +8,10 @@ declare global {
                 role: Role;
             };
         }
+        interface User {
+            id?: number;
+            userId: number;
+            role: UserRole;
+        }
     }
 }

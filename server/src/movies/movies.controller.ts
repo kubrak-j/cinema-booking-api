@@ -2,7 +2,10 @@ import { Controller, Get, Post, Patch, Delete, Param, Body, ParseIntPipe } from 
 import { MoviesService } from "./movies.service.js";
 import { CreateMovieDto } from "./dto/create-movie.dto.js";
 import { UpdateMovieDto } from "./dto/update-movie.dto.js";
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 
+@UseGuards(JwtAuthGuard)
 @Controller('movies')
 export class MoviesController {
     constructor(private readonly moviesService: MoviesService) {}

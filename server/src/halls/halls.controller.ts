@@ -2,7 +2,10 @@ import { Controller, Get, Post, Patch, Delete, Param, Body, ParseIntPipe } from 
 import { HallsService } from "./halls.service.js";
 import { CreateHallDto } from "./dto/create-hall.dto.js";
 import { UpdateHallDto } from "./dto/update-hall.dto.js";
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 
+@UseGuards(JwtAuthGuard)
 @Controller('halls')
 export class HallsController {
     constructor(private readonly hallsService: HallsService) {}
