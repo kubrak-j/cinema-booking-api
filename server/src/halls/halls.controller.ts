@@ -5,7 +5,6 @@ import { UpdateHallDto } from "./dto/update-hall.dto.js";
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 
-@UseGuards(JwtAuthGuard)
 @Controller('halls')
 export class HallsController {
     constructor(private readonly hallsService: HallsService) {}
@@ -20,16 +19,19 @@ export class HallsController {
         return this.hallsService.findOne(id);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() dto: CreateHallDto) {
         return this.hallsService.create(dto);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Patch(':id')
     patch(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateHallDto) {
         return this.hallsService.patch(id, dto);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete(':id')
     delete(@Param('id', ParseIntPipe) id: number ){
         return this.hallsService.delete(id);

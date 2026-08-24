@@ -20,16 +20,19 @@ export class SessionsController {
         return this.sessionsService.findOne(id);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() dto: CreateSessionDto) {
         return this.sessionsService.create(dto);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Patch(':id')
     patch(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateSessionDto) {
         return this.sessionsService.patch(id, dto);
     }
     
+    @UseGuards(JwtAuthGuard)
     @Delete(':id')
     delete(@Param('id', ParseIntPipe) id: number ){
         return this.sessionsService.delete(id);
