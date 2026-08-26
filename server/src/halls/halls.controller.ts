@@ -4,6 +4,8 @@ import { CreateHallDto } from "./dto/create-hall.dto.js";
 import { UpdateHallDto } from "./dto/update-hall.dto.js";
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { Roles } from '../auth/decorators/roles.decorator.js';
+import { RolesGuard } from "../auth/guards/roles.guard.js";
 
 @Controller('halls')
 export class HallsController {
@@ -19,20 +21,23 @@ export class HallsController {
         return this.hallsService.findOne(id);
     }
 
-    @UseGuards(JwtAuthGuard)
     @Post()
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('ADMIN')
     create(@Body() dto: CreateHallDto) {
         return this.hallsService.create(dto);
     }
 
-    @UseGuards(JwtAuthGuard)
     @Patch(':id')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('ADMIN')
     patch(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateHallDto) {
         return this.hallsService.patch(id, dto);
     }
 
-    @UseGuards(JwtAuthGuard)
     @Delete(':id')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('ADMIN')
     delete(@Param('id', ParseIntPipe) id: number ){
         return this.hallsService.delete(id);
     }

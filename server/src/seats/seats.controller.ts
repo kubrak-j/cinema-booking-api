@@ -4,6 +4,8 @@ import { CreateSeatDto } from "./dto/create-seat.dto.js";
 import { UpdateSeatDto } from "./dto/update-seat.dto.js";
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { Roles } from '../auth/decorators/roles.decorator.js';
+import { RolesGuard } from "../auth/guards/roles.guard.js";
 
 @Controller('halls/:hallId/seats')
 export class SeatsController {
@@ -19,20 +21,23 @@ export class SeatsController {
         return this.seatsService.findOne(seatId);
     }
 
-    @UseGuards(JwtAuthGuard)
     @Post()
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('ADMIN')
     create(@Param('hallId', ParseIntPipe) hallId: number, @Body() dto: CreateSeatDto) {
         return this.seatsService.create(hallId, dto);
     }
 
-    @UseGuards(JwtAuthGuard)
     @Patch(':seatId')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('ADMIN')
     patch(@Param('seatId', ParseIntPipe) seatId: number, @Body() dto: UpdateSeatDto) {
         return this.seatsService.patch(seatId, dto);
     }
 
-    @UseGuards(JwtAuthGuard)
     @Delete(':seatId')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('ADMIN')
     delete(@Param('seatId', ParseIntPipe) seatId: number) {
         return this.seatsService.delete(seatId);
     }

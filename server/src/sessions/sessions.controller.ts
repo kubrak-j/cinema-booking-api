@@ -4,6 +4,8 @@ import { CreateSessionDto } from "./dto/create-session.dto.js";
 import { UpdateSessionDto } from "./dto/update-session.dto.js";
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { Roles } from '../auth/decorators/roles.decorator.js';
+import { RolesGuard } from "../auth/guards/roles.guard.js";
 
 @UseGuards(JwtAuthGuard)
 @Controller('sessions')
@@ -20,20 +22,23 @@ export class SessionsController {
         return this.sessionsService.findOne(id);
     }
 
-    @UseGuards(JwtAuthGuard)
     @Post()
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('ADMIN')
     create(@Body() dto: CreateSessionDto) {
         return this.sessionsService.create(dto);
     }
 
-    @UseGuards(JwtAuthGuard)
     @Patch(':id')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('ADMIN')
     patch(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateSessionDto) {
         return this.sessionsService.patch(id, dto);
     }
     
-    @UseGuards(JwtAuthGuard)
     @Delete(':id')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('ADMIN')
     delete(@Param('id', ParseIntPipe) id: number ){
         return this.sessionsService.delete(id);
     }
