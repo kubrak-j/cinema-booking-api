@@ -4,6 +4,7 @@ import { SessionsModule } from "./sessions/sessions.module.js";
 import { HallsModule } from './halls/halls.module.js';
 import { SeatsModule } from './seats/seats.module.js';
 import { AuthModule } from "./auth/auth.module.js";
+import { BookingsModule } from './bookings/bookings.module.js';
 
 @Module({
     imports: [
@@ -11,7 +12,8 @@ import { AuthModule } from "./auth/auth.module.js";
         SessionsModule,
         HallsModule,
         SeatsModule,
-        AuthModule
+        AuthModule,
+        BookingsModule
     ],
     controllers: [],
     providers: [],
