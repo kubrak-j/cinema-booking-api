@@ -9,14 +9,7 @@ import { generateTicket } from "../utils/ticket.js";
 export class BookingsService {
     constructor(private readonly prisma: PrismaService) {}
 
-    findAll(userId: number) {
-        return this.prisma.booking.findMany({
-            where: { userId },
-            orderBy: { id: 'asc' },
-        });
-    }
-
-    async findOne(id: number, userId: number) {
+    private async getOwnedBookingOrThrow(id: number, userId: number) {
         const booking = await this.prisma.booking.findUnique({ where: { id } });
 
         if (!booking) {
@@ -28,6 +21,14 @@ export class BookingsService {
         }
 
         return booking;
+    }
+
+    findAll(userId: number) {
+        return this.prisma.booking.findMany({ where: { userId }, orderBy: { id: 'asc' } });
+    }
+
+    findOne(id: number, userId: number) {
+        return this.getOwnedBookingOrThrow(id, userId);
     }
 
     async create(dto: CreateBookingDto, userId: number) {
@@ -66,33 +67,14 @@ export class BookingsService {
     }
 
     async patch(id: number, dto: UpdateBookingDto, userId: number) {
-        const booking = await this.prisma.booking.findUnique({ where: { id } });
+        await this.getOwnedBookingOrThrow(id, userId);
 
-        if (!booking) {
-            throw new NotFoundException(`Booking with id ${id} not found`);
-        }
-
-        if (booking.userId !== userId) {
-            throw new ForbiddenException('You do not have access to this booking');
-        }
-
-        return this.prisma.booking.update({
-            where: { id },
-            data: dto,
-        });
+        return this.prisma.booking.update({ where: { id }, data: dto });
     }
 
     async delete(id: number, userId: number) {
-        const booking = await this.prisma.booking.findUnique({ where: { id } });
+        await this.getOwnedBookingOrThrow(id, userId);
 
-        if (!booking) {
-            throw new NotFoundException(`Booking with id ${id} not found`);
-        }
-
-        if (booking.userId !== userId) {
-            throw new ForbiddenException('You do not have access to this booking');
-        }
-        
         return this.prisma.booking.delete({ where: { id } });
     }
 }

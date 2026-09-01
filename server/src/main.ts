@@ -13,6 +13,7 @@ async function bootstrap() {
         whitelist: true,
         forbidNonWhitelisted: true,
         transform: true,
+        transformOptions: { enableImplicitConversion: true },
     }));
 
     const port = process.env.PORT ?? 3000;
