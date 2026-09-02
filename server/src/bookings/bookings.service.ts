@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { Injectable, NotFoundException, BadRequestException, ForbiddenException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateBookingDto } from "./dto/create-booking.dto.js";
@@ -7,7 +8,10 @@ import { generateTicket } from "../utils/ticket.js";
 
 @Injectable()
 export class BookingsService {
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(
+        private readonly prisma: PrismaService,
+        private readonly configService: ConfigService
+    ) {}
 
     private async getOwnedBookingOrThrow(id: number, userId: number) {
         const booking = await this.prisma.booking.findUnique({ where: { id } });
@@ -53,7 +57,13 @@ export class BookingsService {
             throw new BadRequestException('This seat does not belong to the hall of the selected session');
         }
 
-        const ticketCode = generateTicket(session.id, session.hall.name, seat.row, seat.number);
+        const ticketCode = generateTicket(
+            this.configService.getOrThrow<string>('TICKET_SECRET'),
+            session.id,
+            session.hall.name,
+            seat.row,
+            seat.number,
+        );
         const totalPrice = priceCalculate(session.basePrice.toNumber(), seat.seatCategory);
 
         return this.prisma.booking.create({

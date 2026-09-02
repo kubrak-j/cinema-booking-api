@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module.js';
@@ -6,6 +6,8 @@ import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter.
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+
+    const configService = app.get(ConfigService);
 
     app.enableCors();
     app.useGlobalFilters(new PrismaExceptionFilter());
@@ -16,7 +18,7 @@ async function bootstrap() {
         transformOptions: { enableImplicitConversion: true },
     }));
 
-    const port = process.env.PORT ?? 3000;
+    const port = configService.getOrThrow<number>('PORT');
     await app.listen(port);
     console.log(`Server started on port ${port}`);
 }

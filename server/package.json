@@ -22,6 +22,7 @@
   "type": "module",
   "dependencies": {
     "@nestjs/common": "^11.1.28",
+    "@nestjs/config": "^12.0.0",
     "@nestjs/core": "^11.1.28",
     "@nestjs/jwt": "^11.0.2",
     "@nestjs/mapped-types": "^2.1.1",
@@ -35,6 +36,7 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "joi": "^18.2.5",
     "jsonwebtoken": "^9.0.3",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
