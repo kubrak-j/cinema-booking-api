@@ -44,15 +44,19 @@ coverage/
 
 # Environment variables
 .env
+.env.local
+.env.development
+.env.dev
+.env.production
+.env.prod
+.env.test
 **/.env
 **/.env.local
-**/.env.*.local
+**/.env.development
+**/.env.dev
+**/.env.production
+**/.env.prod
 **/.env.test
-**/.env.docker
-.env.local
-.env.*.local
-.env.test
-.env.docker
 secret.json
 config.json
 *.pem

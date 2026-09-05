@@ -55,6 +55,8 @@ postman/
 .http-client/
 http-tests/
 *.http
+prisma/seed/
+rest-client/
 
 # Docker Orchestration (Optional to ignore)
 # Dockerfile*
