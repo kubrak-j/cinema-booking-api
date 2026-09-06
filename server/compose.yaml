@@ -16,9 +16,27 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  migrate:
+    build:
+      context: .
+      target: migrator
+      provenance: false
+      sbom: false
+    image: cinema-migrate-image:latest
+    container_name: cinema-migrate
+    env_file:
+      - .env.prod
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
   server:
     build:
       context: .
+      target: runner
+      provenance: false
+      sbom: false
     image: cinema-server-image:latest
     container_name: cinema-server
     env_file:
@@ -26,8 +44,10 @@ services:
     ports:
       - "7000:7000"
     depends_on:
-       db:
-         condition: service_healthy
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
 
 volumes:
   pgdata:
