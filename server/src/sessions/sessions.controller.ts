@@ -7,7 +7,6 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 import { Roles } from '../auth/decorators/roles.decorator.js';
 import { RolesGuard } from "../auth/guards/roles.guard.js";
 
-@UseGuards(JwtAuthGuard)
 @Controller('sessions')
 export class SessionsController {
     constructor(private readonly sessionsService: SessionsService) {}
