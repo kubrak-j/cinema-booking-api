@@ -1,0 +1,5115 @@
+{
+  "info": {
+    "_postman_id": "bf959539-1453-466e-ba8c-c31aeaad87e9",
+    "name": "Cinema-booking Collection",
+    "description": "# Cinema Booking API — Postman Workspace Documentation\n\nWelcome to the official Postman collection for the **Cinema Booking API**. This documentation serves as a blueprint and comprehensive testing suite for a modern movie ticketing and cinema management platform.\n\n---\n\n## 🔐 Authentication, Environment & Automation\n\nThe API utilizes secure **JWT (JSON Web Token)** authentication, heavily optimized within this collection for rapid, automated testing.\n\n### 🌐 Environment & Variables\n\nTo execute these requests, ensure that your Postman environment is actively set to **`Local Dev`**. It manages the following global states:\n\n- `{{baseUrl}}` — Defaults to `http://localhost:7000` for localized development.\n    \n- `{{userPassword}}` — A unified, pre-configured testing password applied across all mock profiles to streamline the authentication lifecycle without hardcoding credentials into individual requests.\n    \n- `{{jwt_token}}` — Dynamically updated after any login sequence.\n    \n\n### ⚙️ Token Management Workflow\n\n1. **Targeted Testing Accounts:** Inside the `auth` folder, separate folders for **Post registers requests** and **Post logins requests** contain dedicated, identity-specific requests for standard testing personas (e.g., `lcroft`, `kmitnick`, `mscott`, `nwilliams`, `asmith`).\n    \n2. **Token Extraction:** Upon executing any successful request from the login folder, the server returns a JSON payload containing the `accessToken`.\n    \n3. **Automated Environment Storage:** A pre-configured Postman test script automatically extracts this token and saves it directly to your **`Local Dev`** **environment file** as the `jwt_token` variable.\n    \n4. **Inheritance:** All protected endpoints across the workspace inherit this token seamlessly via **Bearer Authentication**.\n    \n\n---\n\n## 🗂️ Collection Architecture & Request Routing\n\nEvery entity within this collection follows a standardized, highly predictable folder taxonomy separated by HTTP methods: `GET requests`, `POST requests`, `PATCH requests`, and `DELETE requests`.\n\n### 📌 Universal CRUD Behavior (GET & DELETE Profiles)\n\nFor all resources below (**Movies**, **Sessions**, **Bookings**, **Halls**, **Seats**), the query and removal structures remain identical:\n\n- **Fetch All / List:** A base route execution (e.g., `GET {{baseUrl}}/movies`) instantly retrieves the complete array of records.\n    \n- **Fetch Single Entity:** Appending an ID directly to the path (e.g., `GET {{baseUrl}}/movies/1`) isolates and returns that specific record.\n    \n- **Purge Records:** Executing the matching `DELETE` endpoint with an explicit entity ID permanently removes it from the host database.\n    \n\n---\n\n## 📁 Detailed Resource & PATCH Specifications\n\n### 🎬 Movies\n\nHandles full administrative control over the cinema's film catalog.\n\n- **POST:** Spawns a new movie card complete with core metadata.\n    \n- **PATCH Modifications:** Tailored explicitly to alter critical operational properties. Updates the film's **`ageRating`** (age restrictions) and **`duration`** fields.\n    \n\n### 📅 Sessions\n\nControls the real-time timeline matrix and showtimes for screenings.\n\n- **POST:** Schedules a distinct screening by linking a movie entry to a specific time.\n    \n- **PATCH Modifications:** Dynamically updates live operational parameters. Specifically alters the current session **`status`** and**`basePrice`**.\n    \n\n### 🎟️ Bookings\n\nManages user ticketing transactions and reservation flows.\n\n- **POST:** Reserves an available seat for an individual customer.\n    \n- **PATCH Modifications:** Allows for operational booking overrides and ticket re-assignments. Updates the specific **`hallId`** (assigned theater room) and **`seatId`** (physical location/seat coordinates).\n    \n\n### 🏛️ Halls\n\nConfigures the physical viewing rooms and layout properties of the cinema (e.g., VIP, IMAX, Green).\n\n- **POST:** Creates and registers a new theater room layout.\n    \n- **PATCH Modifications:** Targets identification adjustments. Specifically rewrites the registered **`name`** of the hall.\n    \n\n### 💺 Seats\n\nConfigures individual structural nodes and seating availability charts within the theaters.\n\n- **POST:** Maps new seats into a specific hall matrix.\n    \n- **PATCH Modifications:** Adjusts tier classifications. Specifically toggles the seat type tier between **`vip`** and **`standard`**.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54985562",
+    "_collection_link": "https://go.postman.co/collection/54985562-bf959539-1453-466e-ba8c-c31aeaad87e9?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "movies",
+      "item": [
+        {
+          "name": "Get movies requests",
+          "item": [
+            {
+              "name": "/movies",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/1",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/2",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/3",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/4",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/5",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/6",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/6",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "6"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/7",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/8",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "8"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/9",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "9"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/10",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "10"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Get movies requests** — Requests for retrieving movies. Includes fetching the full list of movies and looking up a specific movie by its ID.",
+          "auth": {
+            "type": "noauth"
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Post movies requests",
+          "item": [
+            {
+              "name": "/movies - The Shawshank Redemption",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"The Shawshank Redemption\",\r\n    \"description\": \"A prominent banker is wrongly convicted of murder and sentenced to life imprisonment at the Shawshank prison. Over the years, he forms a deep friendship with a fellow inmate and finds ways to retain his humanity and hope.\",\r\n    \"duration\": 142,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Gladiator",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Gladiator\",\r\n    \"description\": \"A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery. He rises through the ranks of the gladiatorial arena to face his enemy.\",\r\n    \"duration\": 155,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Avatar",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Avatar\",\r\n    \"description\": \"A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.\",\r\n    \"duration\": 162,\r\n    \"ageRating\": \"PG13\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - The Lion King",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"The Lion King\",\r\n    \"description\": \"A young lion prince flees his kingdom after the murder of his father, only to learn the true meaning of responsibility and bravery when he returns to reclaim his throne.\",\r\n    \"duration\": 88,\r\n    \"ageRating\": \"G\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - The Matrix",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"The Matrix\",\r\n    \"description\": \"A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.\",\r\n    \"duration\": 136,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Spider-Man: Into the Spider-Verse",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Spider-Man: Into the Spider-Verse\",\r\n    \"description\": \"Teen Miles Morales becomes the Spider-Man of his universe and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.\",\r\n    \"duration\": 117,\r\n    \"ageRating\": \"PG\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Fight Club",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Fight Club\",\r\n    \"description\": \"An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.\",\r\n    \"duration\": 139,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Jurassic Park",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Jurassic Park\",\r\n    \"description\": \"A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.\",\r\n    \"duration\": 127,\r\n    \"ageRating\": \"PG13\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - Mad Max: Fury Road",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Mad Max: Fury Road\",\r\n    \"description\": \"In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland with the aid of a group of female prisoners, a psychotic worshiper, and a drifter named Max.\",\r\n    \"duration\": 120,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies - The Grand Budapest Hotel",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"The Grand Budapest Hotel\",\r\n    \"description\": \"A writer encounters the owner of a declining high-class hotel, who tells him of his early years as a lobby boy in the hotel's glorious years under an exceptional concierge.\",\r\n    \"duration\": 99,\r\n    \"ageRating\": \"R\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Post movies requests** — Requests for adding new movies to the catalogue. Accepts movie details such as title, description, duration, and ageRating.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Patch movies requests",
+          "item": [
+            {
+              "name": "/movies/1 - ageRating",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"ageRating\": \"R\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/2 - duration",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"duration\": 142 }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "2"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/2\" -H \"Content-Type: application/json\" -d \"{\\\"duration\\\": 142}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/3 - ageRating",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"ageRating\": \"R\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "3"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/3\" -H \"Content-Type: application/json\" -d \"{\\\"ageRating\\\": \\\"R\\\"}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/4 - duration",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"duration\": 162 }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "4"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/4\" -H \"Content-Type: application/json\" -d \"{\\\"duration\\\": 162}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/5 - ageRating",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"ageRating\": \"G\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "5"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/5\" -H \"Content-Type: application/json\" -d \"{\\\"ageRating\\\": \\\"G\\\"}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/6 - duration",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"duration\": 136 }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/6",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "6"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/6\" -H \"Content-Type: application/json\" -d \"{\\\"duration\\\": 136}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/7 - ageRating",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"ageRating\": \"PG\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "7"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/7\" -H \"Content-Type: application/json\" -d \"{\\\"ageRating\\\": \\\"PG\\\"}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/8 - ageLimit",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"ageRating\": \"PG13\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "8"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/8\" -H \"Content-Type: application/json\" -d \"{\\\"ageLimit\\\": true}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/9 - duration",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"duration\": 127 }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "9"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/9\" -H \"Content-Type: application/json\" -d \"{\\\"duration\\\": 127}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/10 - ageRating",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"ageRating\": \"R\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/movies/10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "10"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/movies/10\" -H \"Content-Type: application/json\" -d \"{\\\"ageRating\\\": \\\"R\\\"}\""
+              },
+              "response": []
+            }
+          ],
+          "description": "**Patch movies requests** — Requests for partially updating an existing movie, such as modifying its ageRating or duration movie.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete movies requests",
+          "item": [
+            {
+              "name": "/movies/1",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/2",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "2"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/2"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/3",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "3"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/3"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/4",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "4"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/4"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/5",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "5"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/5"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/6",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/6",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "6"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/6"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/7",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "7"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/7"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/8",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "8"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/8"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/9",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "9"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/9"
+              },
+              "response": []
+            },
+            {
+              "name": "/movies/10",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/movies/10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "movies",
+                    "10"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/movies/10"
+              },
+              "response": []
+            }
+          ],
+          "description": "**Delete movies requests** — Requests for permanently removing a movie from the catalogue by its ID.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Manages the cinema's movie catalogue. Provides full CRUD operations for movies, including listing all available titles, fetching a single movie by its ID, adding new movies with details such as name, description, duration, and ageRating, updating a movie's ageRating and duration, and removing movies from the catalogue."
+    },
+    {
+      "name": "sessions",
+      "item": [
+        {
+          "name": "Get sessions requests",
+          "item": [
+            {
+              "name": "/sessions",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/1",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/2",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "2"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X GET \"{{baseUrl}}/sessions/2\""
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/3",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "3"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X GET \"{{baseUrl}}/sessions/3\""
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/4",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "4"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X GET \"{{baseUrl}}/sessions/4\""
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/5",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "5"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X GET \"{{baseUrl}}/sessions/5\""
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/6",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/6",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "6"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X GET \"{{baseUrl}}/sessions/6\""
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/7",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "7"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X GET \"{{baseUrl}}/sessions/7\""
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/8",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "8"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X GET \"{{baseUrl}}/sessions/8\""
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/9",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "9"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X GET \"{{baseUrl}}/sessions/9\""
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/10",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "10"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X GET \"{{baseUrl}}/sessions/10\""
+              },
+              "response": []
+            }
+          ],
+          "description": "**Get sessions requests** — Requests for retrieving sessions. Includes listing all sessions and fetching a single session by its ID.",
+          "auth": {
+            "type": "noauth"
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Post sessions requests",
+          "item": [
+            {
+              "name": "/sessions - The Shawshank Redemption",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-01T10:00:00.000Z\",\r\n    \"movieId\": 1,\r\n    \"hallId\": 1,\r\n    \"status\": \"SCHEDULED\",\r\n    \"basePrice\": 12.50\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST {{baseUrl}}/sessions -H \"Content-Type: application/json\" -d '{\"startTime\": \"2026-09-01T10:00:00.000Z\", \"movieId\": 1, \"hallId\": 1, \"status\": \"SCHEDULED\", \"basePrice\": 12.50}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions - Gladiator",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-01T13:00:00.000Z\",\r\n    \"movieId\": 2,\r\n    \"hallId\": 2,\r\n    \"status\": \"CANCELLED\",\r\n    \"basePrice\": 13.00\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST {{baseUrl}}/sessions -H \"Content-Type: application/json\" -d '{\"startTime\": \"2026-09-01T13:00:00.000Z\", \"movieId\": 2, \"hallId\": 2, \"status\": \"SCHEDULED\", \"basePrice\": 13.00}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions - Avatar",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-02T16:00:00.000Z\",\r\n    \"movieId\": 3,\r\n    \"hallId\": 3,\r\n    \"status\": \"FINISHED\",\r\n    \"basePrice\": 14.00\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST {{baseUrl}}/sessions -H \"Content-Type: application/json\" -d '{\"startTime\": \"2026-09-02T16:00:00.000Z\", \"movieId\": 3, \"hallId\": 3, \"status\": \"SCHEDULED\", \"basePrice\": 14.00}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions - The Lion King",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-02T11:00:00.000Z\",\r\n    \"movieId\": 4,\r\n    \"hallId\": 1,\r\n    \"status\": \"SCHEDULED\",\r\n    \"basePrice\": 10.00\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST {{baseUrl}}/sessions -H \"Content-Type: application/json\" -d '{\"startTime\": \"2026-09-02T11:00:00.000Z\", \"movieId\": 4, \"hallId\": 1, \"status\": \"SCHEDULED\", \"basePrice\": 10.00}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions - The Matrix",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-03T19:00:00.000Z\",\r\n    \"movieId\": 5,\r\n    \"hallId\": 2,\r\n    \"status\": \"CANCELLED\",\r\n    \"basePrice\": 12.00\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST {{baseUrl}}/sessions -H \"Content-Type: application/json\" -d '{\"startTime\": \"2026-09-03T19:00:00.000Z\", \"movieId\": 5, \"hallId\": 2, \"status\": \"SCHEDULED\", \"basePrice\": 12.00}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions - Spider-Man: Into the Spider-Verse",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-03T14:30:00.000Z\",\r\n    \"movieId\": 6,\r\n    \"hallId\": 3,\r\n    \"status\": \"SCHEDULED\",\r\n    \"basePrice\": 11.50\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST {{baseUrl}}/sessions -H \"Content-Type: application/json\" -d '{\"startTime\": \"2026-09-03T14:30:00.000Z\", \"movieId\": 6, \"hallId\": 3, \"status\": \"SCHEDULED\", \"basePrice\": 11.50}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions - Fight Club",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-04T20:00:00.000Z\",\r\n    \"movieId\": 7,\r\n    \"hallId\": 1,\r\n    \"status\": \"SCHEDULED\",\r\n    \"basePrice\": 13.50\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST {{baseUrl}}/sessions -H \"Content-Type: application/json\" -d '{\"startTime\": \"2026-09-04T20:00:00.000Z\", \"movieId\": 7, \"hallId\": 1, \"status\": \"SCHEDULED\", \"basePrice\": 13.50}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions - Jurassic Park",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-04T15:00:00.000Z\",\r\n    \"movieId\": 8,\r\n    \"hallId\": 2,\r\n    \"status\": \"FINISHED\",\r\n    \"basePrice\": 12.00\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST {{baseUrl}}/sessions -H \"Content-Type: application/json\" -d '{\"startTime\": \"2026-09-04T15:00:00.000Z\", \"movieId\": 8, \"hallId\": 2, \"status\": \"SCHEDULED\", \"basePrice\": 12.00}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions - Mad Max: Fury Road",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-05T18:00:00.000Z\",\r\n    \"movieId\": 9,\r\n    \"hallId\": 3,\r\n    \"status\": \"FINISHED\",\r\n    \"basePrice\": 14.50\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST {{baseUrl}}/sessions -H \"Content-Type: application/json\" -d '{\"startTime\": \"2026-09-05T18:00:00.000Z\", \"movieId\": 9, \"hallId\": 3, \"status\": \"SCHEDULED\", \"basePrice\": 14.50}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions - The Grand Budapest Hotel",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-05T12:00:00.000Z\",\r\n    \"movieId\": 10,\r\n    \"hallId\": 1,\r\n    \"status\": \"SCHEDULED\",\r\n    \"basePrice\": 11.00\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X POST {{baseUrl}}/sessions -H \"Content-Type: application/json\" -d '{\"startTime\": \"2026-09-05T12:00:00.000Z\", \"movieId\": 10, \"hallId\": 1, \"status\": \"SCHEDULED\", \"basePrice\": 11.00}'"
+              },
+              "response": []
+            }
+          ],
+          "description": "**Post sessions requests** — Requests for creating a new screening session. Requires the ID of the associated film and its screening, as well as the startTime, status, and price of the session.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Patch sessions requests",
+          "item": [
+            {
+              "name": "/sessions/1 - status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"status\": \"FINISHED\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "1"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/1\" -H \"Content-Type: application/json\" -d '{\"isActive\": false}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/2 - basePrice",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"basePrice\": 12.00 }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "2"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/2\" -H \"Content-Type: application/json\" -d '{\"status\": \"ONGOING\"}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/3 - basePrice",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"basePrice\": 13.40 }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "3"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/3\" -H \"Content-Type: application/json\" -d '{\"isActive\": true}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/4 - status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"status\": \"FINISHED\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "4"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/4\" -H \"Content-Type: application/json\" -d '{\"status\": \"COMPLETED\"}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/5 - basePrice",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"basePrice\": 13.50 }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "5"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/5\" -H \"Content-Type: application/json\" -d '{\"isActive\": false}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/6 - status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"status\": \"FINISHED\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/6",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "6"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/6\" -H \"Content-Type: application/json\" -d '{\"status\": \"CANCELLED\"}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/7 - status, basePrice",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"status\": \"CANCELLED\",\r\n    \"basePrice\": 14.00\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "7"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/7\" -H \"Content-Type: application/json\" -d '{\"isActive\": true}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/8 - startTime, basePrice",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-04T17:00:00.000Z\",\r\n    \"basePrice\": 13.00\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "8"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/8\" -H \"Content-Type: application/json\" -d '{\"status\": \"ONGOING\"}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/9 - status",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"status\": \"CANCELLED\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "9"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/9\" -H \"Content-Type: application/json\" -d '{\"isActive\": false}'"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/10 - startTime, basePrice",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"startTime\": \"2026-09-05T11:00:00.000Z\",\r\n    \"basePrice\": 10.50\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "10"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/10\" -H \"Content-Type: application/json\" -d '{\"status\": \"COMPLETED\"}'"
+              },
+              "response": []
+            }
+          ],
+          "description": "**Patch sessions requests** — Requests for partial session updates, such as changing the session price and session status.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete sessions requests",
+          "item": [
+            {
+              "name": "/sessions/1",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "1"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/sessions/1"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/2",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "2"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/sessions/2"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/3",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "3"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/sessions/3"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/4",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "4"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/sessions/4"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/5",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "5"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/sessions/5"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/6",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/6",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "6"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/sessions/6"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/7",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "7"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/sessions/7"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/8",
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "host": true,
+                  "user-agent": true,
+                  "accept": true,
+                  "accept-encoding": true,
+                  "connection": true
+                }
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "8"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/sessions/8"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/9",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "9"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/sessions/9"
+              },
+              "response": []
+            },
+            {
+              "name": "/sessions/10",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sessions/10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "sessions",
+                    "10"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X DELETE {{baseUrl}}/sessions/10"
+              },
+              "response": []
+            }
+          ],
+          "description": "**Delete sessions requests** — Requests for deleting one or more sessions by their IDs.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Manages movie screenings. A screening associates a film with a specific date and screening. Supports displaying all screenings, searching for a screening by ID, creating new screenings, changing the screening price and status via PATCH, and deleting screenings."
+    },
+    {
+      "name": "bookings",
+      "item": [
+        {
+          "name": "Get bookings requests",
+          "item": [
+            {
+              "name": "/bookings",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/1",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/2",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/3",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/4",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/5",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/6",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/6",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "6"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/7",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/8",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "8"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/9",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "9"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/10",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "10"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Get bookings requests** — Requests for retrieving bookings. Includes listing all bookings and fetching a specific booking by its ID.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Post bookings requests",
+          "item": [
+            {
+              "name": "/bookings - hallId 1, seatId 1",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 1,\r\n    \"seatId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings - hallId 2, seatId 8",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 2,\r\n    \"seatId\": 8\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings - hallId 3, seatId 20",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 3,\r\n    \"seatId\": 20\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings - hallId 1, seatId 27",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 4,\r\n    \"seatId\": 27\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings - hallId 2, seatId 14",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 5,\r\n    \"seatId\": 14\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings - hallId 3, seatId 16",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 6,\r\n    \"seatId\": 16\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings - hallId 1, seatId 5",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 7,\r\n    \"seatId\": 5\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings - hallId 2, seatId 30",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 8,\r\n    \"seatId\": 30\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings - hallId 3, seatId 22",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 9,\r\n    \"seatId\": 22\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings - hallId 1, seatId 15",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 10,\r\n    \"seatId\": 15\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Post bookings requests** — Requests for creating a new booking. Associates a user with selected seats in a given session.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Patch bookings requests",
+          "item": [
+            {
+              "name": "/bookings/1 - hallId 1, seatId 18",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 1,\r\n    \"seatId\": 18\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/2 - hallId 1, seatId 12",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 3,\r\n    \"seatId\": 12\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/3 - hallId 3, seatId 23",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 7,\r\n    \"seatId\": 23\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/4 - hallId 2, seatId 22",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 2,\r\n    \"seatId\": 22\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/5 - hallId 1, seatId 14",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 5,\r\n    \"seatId\": 14\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/6 - hallId 1, seatId 25",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 8,\r\n    \"seatId\": 25\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/6",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "6"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/7 - hallId 3, seatId 10",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 10,\r\n    \"seatId\": 10\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/8 - hallId 1, seatId 16",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 9,\r\n    \"seatId\": 16\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "8"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/9 - hallId 2, seatId 13",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 4,\r\n    \"seatId\": 13\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "9"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/10 - hallId 3, seatId 3",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"sessionId\": 6,\r\n    \"seatId\": 3\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "10"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Patch bookings requests** — Requests for partially updating an existing booking, such as changing the reserved seats.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete bookings requests",
+          "item": [
+            {
+              "name": "/bookings/1",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/2",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/3",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/4",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/5",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/6",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/6",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "6"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/7",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/7",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/8",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "8"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/9",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/9",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "9"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/bookings/10",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/bookings/10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bookings",
+                    "10"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Delete bookings requests** — Requests for cancelling and removing a booking by its ID.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Handles the seat reservation workflow. Allows users to create, view, update, and cancel bookings for a specific session. Each booking links a user to one or more seats in a session."
+    },
+    {
+      "name": "halls",
+      "item": [
+        {
+          "name": "Get halls requests",
+          "item": [
+            {
+              "name": "/halls",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/halls",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/2",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/3",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/4",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Get halls requests** — Requests for retrieving halls. Includes listing all halls and fetching a specific hall by its ID.",
+          "auth": {
+            "type": "noauth"
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Post halls requests",
+          "item": [
+            {
+              "name": "/halls - VIP",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"VIP\",\r\n    \"layout\": [\r\n        [\"VIP\", \"VIP\", \"VIP\", \"VIP\", \"VIP\"],\r\n        [\"VIP\", \"VIP\", \"VIP\", \"VIP\", \"VIP\"],\r\n        [\"VIP\", \"VIP\", \"VIP\", \"VIP\", \"VIP\"],\r\n        [\"VIP\", \"VIP\", \"VIP\", \"VIP\", \"VIP\"],\r\n        [\"VIP\", \"VIP\", \"VIP\", \"VIP\", \"VIP\"],\r\n        [\"VIP\", \"VIP\", \"VIP\", \"VIP\", \"VIP\"]\r\n    ]\r\n}\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls - IMAX Laser",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"IMAX Laser\",\r\n    \"layout\": [\r\n        [\"VIP\", \"VIP\", \"VIP\", \"VIP\", \"VIP\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"]\r\n    ]\r\n}\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls - Green",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Green\",\r\n    \"layout\": [\r\n        [\"VIP\", \"VIP\", \"VIP\", \"VIP\", \"VIP\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"]\r\n    ]\r\n}\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls - Dolby Atmos",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Dolby Atmos\",\r\n    \"layout\": [\r\n        [\"VIP\", \"VIP\", \"VIP\", \"VIP\", \"VIP\", \"VIP\", \"VIP\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"],\r\n        [\"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\", \"STANDARD\"]\r\n    ]\r\n}\r\n"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Post halls requests** — Requests for creating new halls. Accepts a hall name and layout which includes seats and their categories.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Patch halls requests",
+          "item": [
+            {
+              "name": "/halls/1 - 4DX",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"name\": \"4DX\" }"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/2 - HFR",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"name\": \"HFR\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "2"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/1\" -H \"Content-Type: application/json\" -d \"{\\n    \\\"status\\\": \\\"CANCELLED\\\"\\n}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/3 - 4D",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"name\": \"4D\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "3"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/1\" -H \"Content-Type: application/json\" -d \"{\\n    \\\"status\\\": \\\"CANCELLED\\\"\\n}\""
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/4 - 3D",
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"name\": \"3D\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "4"
+                  ]
+                },
+                "description": "Generated from cURL: curl -X PATCH \"{{baseUrl}}/sessions/1\" -H \"Content-Type: application/json\" -d \"{\\n    \\\"status\\\": \\\"CANCELLED\\\"\\n}\""
+              },
+              "response": []
+            }
+          ],
+          "description": "Hall Update Requests - Requests for a partial update of an existing hall, such as renaming it (e.g. 4DX, HFR, 3D, 4D).",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete halls requests",
+          "item": [
+            {
+              "name": "/halls/1",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/2",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/3",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/4",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "disabled": false
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Delete halls requests** — Requests for permanently removing a hall by its ID.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Manages the physical screening halls within the cinema. Each hall has a name and a seating configuration. Supports listing all halls, retrieving a hall by ID, creating new halls (e.g. VIP, IMAX Laser, Dolby Atmos, 4DX), updating hall details, and deleting halls."
+    },
+    {
+      "name": "seats",
+      "item": [
+        {
+          "name": "Get seats requests",
+          "item": [
+            {
+              "name": "/halls/1/seats",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats/1",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats/2",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats/3",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats/4",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Get seats requests** — Requests for retrieving seats within a hall. Includes listing all seats for a given hall and fetching a specific seat by its ID.",
+          "auth": {
+            "type": "noauth"
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Post seats requests",
+          "item": [
+            {
+              "name": "/halls/1/seats - standard",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"row\": 11,\r\n    \"number\": 1,\r\n    \"seatCategory\": \"STANDARD\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats - vip",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"row\": 11,\r\n    \"number\": 2,\r\n    \"seatCategory\": \"VIP\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats - vip",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"row\": 11,\r\n    \"number\": 3,\r\n    \"seatCategory\": \"VIP\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats - standard",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"row\": 11,\r\n    \"number\": 4,\r\n    \"seatCategory\": \"STANDARD\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Post seats requests** — Requests for adding new seats to a hall. Accepts seat type (standard or VIP) and associates the seat with the specified hall.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Patch seats requests",
+          "item": [
+            {
+              "name": "/halls/1/seats/1 - vip",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"seatCategory\": \"VIP\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats/2 - standard",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"seatCategory\": \"STANDARD\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats/3 - standard",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"seatCategory\": \"STANDARD\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats/4 - vip",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"seatCategory\": \"VIP\" }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Patch seats requests** — Requests for updating the type of an existing seat (e.g. changing from standard to VIP).",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete seats requests",
+          "item": [
+            {
+              "name": "/halls/1/seats/1",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats/2",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/2",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats/3",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/3",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/halls/1/seats/4",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/halls/1/seats/4",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "halls",
+                    "1",
+                    "seats",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Delete seats requests** — Requests for permanently removing a seat from a hall by its ID.",
+          "auth": {
+            "type": "bearer",
+            "bearer": [
+              {
+                "key": "token",
+                "value": "{{jwt_token}}",
+                "type": "string"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Manages individual seats within a hall. Each seat belongs to a hall and has a type (standard or VIP). Supports listing all seats in a hall, retrieving a specific seat, adding new seats, updating seat types, and deleting seats."
+    },
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "Post registers requests",
+          "item": [
+            {
+              "name": "/auth/register - lcroft",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Laura Croft\",\r\n    \"login\": \"lcroft\",\r\n    \"email\": \"laura.croft@example.com\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/auth/register - kmitnick",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Kevin Mitnick\",\r\n    \"login\": \"kmitnick\",\r\n    \"email\": \"kevin.m@example.com\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/auth/register - mscott",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Michael Scott\",\r\n    \"login\": \"mscott\",\r\n    \"email\": \"michael.s@example.com\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/auth/register - nwilliams",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Nina Williams\",\r\n    \"login\": \"nwilliams\",\r\n    \"email\": \"nina.w@example.com\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/auth/register - asmith",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Alice Smith\",\r\n    \"login\": \"asmith\",\r\n    \"email\": \"alice.smith@example.com\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/register",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Post registers requests** — Requests for creating a new user account. Sends user credentials (e.g. email and password) to the registration endpoint and returns the newly created user record.",
+          "auth": {
+            "type": "noauth"
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Post logins requests",
+          "item": [
+            {
+              "name": "/auth/login - lcroft",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"laura.croft@example.com\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/auth/login - kmitnick",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"kevin.m@example.com\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/auth/login - mscott",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"michael.s@example.com\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/auth/login - nwilliams",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"nina.w@example.com\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "/auth/login - asmith",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"alice.smith@example.com\",\r\n    \"password\": \"{{userPassword}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/login",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "**Post logins requests** — Requests for authenticating an existing user. Submits credentials to the login endpoint and returns a JWT token on success, which is stored for use across the collection.",
+          "auth": {
+            "type": "noauth"
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  "const json = pm.response.json();\r",
+                  "if (json.accessToken) {\r",
+                  "    pm.environment.set(\"jwt_token\", json.accessToken);\r",
+                  "}"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "description": "Handles user identity and access. Contains requests for registering a new user account and logging in with existing credentials. A successful login returns a JWT token that is stored in the `jwt_token` collection variable and automatically applied to all subsequent requests that require authentication.",
+      "auth": {
+        "type": "noauth"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    }
+  ]
+}

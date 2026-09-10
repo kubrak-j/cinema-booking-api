@@ -5,7 +5,11 @@ services:
     image: postgres:17-alpine
     container_name: cinema-db
     restart: always
-    env_file: .env.prod
+    env_file:
+    - path: .env
+      required: false
+    - path: .env.prod
+      required: false
     ports:
       - "5432:5432"
     healthcheck:
@@ -25,7 +29,10 @@ services:
     image: cinema-migrate-image:latest
     container_name: cinema-migrate
     env_file:
-      - .env.prod
+    - path: .env
+      required: false
+    - path: .env.prod
+      required: false
     depends_on:
       db:
         condition: service_healthy
@@ -40,7 +47,10 @@ services:
     image: cinema-server-image:latest
     container_name: cinema-server
     env_file:
-      - .env.prod
+    - path: .env
+      required: false
+    - path: .env.prod
+      required: false
     ports:
       - "7000:7000"
     depends_on:
