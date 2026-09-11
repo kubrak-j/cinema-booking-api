@@ -5,36 +5,59 @@ services:
     image: postgres:17-alpine
     container_name: cinema-db
     restart: always
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    env_file:
+    - path: .env
+      required: false
+    - path: .env.prod
+      required: false
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - "5432:5432"
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}" ]
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
       interval: 10s
       timeout: 5s
       retries: 5
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  migrate:
+    build:
+      context: .
+      target: migrator
+      provenance: false
+      sbom: false
+    image: cinema-migrate-image:latest
+    container_name: cinema-migrate
+    env_file:
+    - path: .env
+      required: false
+    - path: .env.prod
+      required: false
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
   server:
     build:
       context: .
+      target: runner
+      provenance: false
+      sbom: false
     image: cinema-server-image:latest
     container_name: cinema-server
-    environment:
-      NODE_ENV: production
-      PORT: ${PORT:-7000}
-      DATABASE_URL: ${DATABASE_URL}
     env_file:
-      - .env
+    - path: .env
+      required: false
+    - path: .env.prod
+      required: false
     ports:
-      - "${PORT:-7000}:${PORT:-7000}"
+      - "7000:7000"
     depends_on:
-       db:
-         condition: service_healthy
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
 
 volumes:
   pgdata:

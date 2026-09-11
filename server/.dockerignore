@@ -49,12 +49,12 @@ Thumbs.db
 *.code-workspace
 
 # Local API Testing and Tools
+api/
 .postman/
 postman/
 .bruno/
 .http-client/
-http-tests/
-*.http
+prisma/seed/
 
 # Docker Orchestration (Optional to ignore)
 # Dockerfile*

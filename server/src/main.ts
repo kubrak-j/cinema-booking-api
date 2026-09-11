@@ -1,21 +1,26 @@
-import express from "express";
-import moviesRouter from "./routes/movies.route.js";
-import sessionsRouter from "./routes/sessions.route.js";
-import authRouter from "./routes/auth.route.js";
-import bookingsRouter from "./routes/bookings.route.js";
-import cors from "cors";
-import { env } from "./config/env.js";
+import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
+import { AppModule } from './app.module.js';
+import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter.js';
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(`/movies`, moviesRouter);
-app.use(`/sessions`, sessionsRouter);
-app.use(`/auth`, authRouter);
-app.use(`/bookings`, bookingsRouter);
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
 
-const port = env.PORT;
+    const configService = app.get(ConfigService);
 
-app.listen(port, () => {
+    app.enableCors();
+    app.useGlobalFilters(new PrismaExceptionFilter());
+    app.useGlobalPipes(new ValidationPipe({
+        whitelist: true,
+        forbidNonWhitelisted: true,
+        transform: true,
+        transformOptions: { enableImplicitConversion: true },
+    }));
+
+    const port = configService.getOrThrow<number>('PORT');
+    await app.listen(port);
     console.log(`Server started on port ${port}`);
-});
+}
+
+bootstrap();
