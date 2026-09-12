@@ -5,22 +5,24 @@ import { AppModule } from './app.module.js';
 import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter.js';
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule);
 
-    const configService = app.get(ConfigService);
+  const configService = app.get(ConfigService);
 
-    app.enableCors();
-    app.useGlobalFilters(new PrismaExceptionFilter());
-    app.useGlobalPipes(new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-        transformOptions: { enableImplicitConversion: true },
-    }));
+  app.enableCors();
+  app.useGlobalFilters(new PrismaExceptionFilter());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+      transformOptions: { enableImplicitConversion: true },
+    }),
+  );
 
-    const port = configService.getOrThrow<number>('PORT');
-    await app.listen(port);
-    console.log(`Server started on port ${port}`);
+  const port = configService.getOrThrow<number>('PORT');
+  await app.listen(port);
+  console.log(`Server started on port ${port}`);
 }
 
-bootstrap();
+void bootstrap();

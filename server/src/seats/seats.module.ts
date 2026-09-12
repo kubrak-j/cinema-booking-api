@@ -4,9 +4,8 @@ import { SeatsController } from './seats.controller.js';
 import { SeatsService } from './seats.service.js';
 
 @Module({
-    imports: [PrismaModule],
-    controllers: [SeatsController],
-    providers: [SeatsService],
+  imports: [PrismaModule],
+  controllers: [SeatsController],
+  providers: [SeatsService],
 })
-
 export class SeatsModule {}

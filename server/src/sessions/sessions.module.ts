@@ -4,9 +4,8 @@ import { SessionsController } from './sessions.controller.js';
 import { SessionsService } from './sessions.service.js';
 
 @Module({
-    imports: [PrismaModule],
-    controllers: [SessionsController],
-    providers: [SessionsService],
+  imports: [PrismaModule],
+  controllers: [SessionsController],
+  providers: [SessionsService],
 })
-
 export class SessionsModule {}

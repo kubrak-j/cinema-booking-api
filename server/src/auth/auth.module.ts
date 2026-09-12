@@ -6,23 +6,22 @@ import { PrismaModule } from '../prisma/prisma.module.js';
 import { AuthController } from './auth.controller.js';
 import { AuthService } from './auth.service.js';
 import { JwtStrategy } from './strategies/jwt.strategy.js';
-import { RolesGuard } from "./guards/roles.guard.js";
+import { RolesGuard } from './guards/roles.guard.js';
 
 @Module({
-    imports: [
-        PrismaModule,
-        UsersModule,
-        JwtModule.registerAsync({
-            imports: [ConfigModule],
-            inject: [ConfigService],
-            useFactory: async (configService: ConfigService) => ({
-                secret: configService.getOrThrow<string>('JWT_SECRET'),
-                signOptions: { expiresIn: '1h' },
-            })
-        }),
-    ],
-    controllers: [AuthController],
-    providers: [AuthService, JwtStrategy, RolesGuard],
+  imports: [
+    PrismaModule,
+    UsersModule,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.getOrThrow<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '1h' },
+      }),
+    }),
+  ],
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy, RolesGuard],
 })
-
 export class AuthModule {}

@@ -11,7 +11,11 @@
     "build": "prisma generate && nest build",
     "db:migrate": "npx prisma migrate dev",
     "db:studio": "npx prisma studio",
-    "db:seed": "npx prisma db seed"
+    "db:seed": "npx prisma db seed",
+    "lint": "eslint \"{src,test}/**/*.ts\"",
+    "lint:fix": "eslint \"{src,test}/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\""
   },
   "prisma": {
     "seed": "tsx prisma/seed/main.seed.ts"
@@ -41,6 +45,7 @@
     "rxjs": "^7.8.2"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@nestjs/cli": "^11.0.24",
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
@@ -48,9 +53,15 @@
     "@types/passport-jwt": "^4.0.1",
     "@types/pg": "^8.20.0",
     "dotenv": "^17.4.2",
+    "eslint": "^10.10.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.6",
     "prisma": "^7.8.0",
     "tsx": "^4.23.13",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.70.0"
   },
   "repository": {
     "type": "git",
