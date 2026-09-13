@@ -1,0 +1,31 @@
+# Build outputs and cache
+dist
+node_modules
+.turbo
+.cache
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
+# Logs and environment variables
+*.log
+logs
+.env
+.env.*
+
+# Testing and test coverage
+coverage
+.nyc_output
+
+# IDE config files
+.vscode
+.idea
+
+# Prisma auto-generated files and migrations
+# Note: Formatting migrations can corrupt database checksums
+prisma/migrations
+prisma/schema.prisma
+
+# Docker config and lock files
+docker-compose.override.yml
