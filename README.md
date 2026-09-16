@@ -2,8 +2,6 @@
 
 A REST API for a cinema booking system. Built to master authentication, relational database design, and role-based access control.
 
-> ⚠️ **Note:** This project was migrated from Express to NestJS. The live demo link below currently points to the older Express deployment and will be updated once the NestJS version is redeployed.
-
 ## 🌐 Live Demo
 
 API is deployed and available at:
