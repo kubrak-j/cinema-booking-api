@@ -3,12 +3,15 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module.js';
 import { PrismaExceptionFilter } from './common/filters/prisma-exception.filter.js';
+import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { bufferLogs: true });
 
   const configService = app.get(ConfigService);
 
+  const logger = app.get(Logger);
+  app.useLogger(app.get(Logger));
   app.enableCors();
   app.useGlobalFilters(new PrismaExceptionFilter());
   app.useGlobalPipes(
@@ -22,7 +25,7 @@ async function bootstrap() {
 
   const port = configService.getOrThrow<number>('PORT');
   await app.listen(port);
-  console.log(`Server started on port ${port}`);
+  logger.log(`Server started on port ${port}`);
 }
 
 void bootstrap();
