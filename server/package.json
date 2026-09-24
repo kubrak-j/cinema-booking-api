@@ -4,7 +4,8 @@
   "description": "A REST API for a cinema booking system. Built to master authentication, relational database design, and role-based access control.",
   "main": "src/main.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "dev": "tsx watch --env-file=.env src/main.ts",
     "start:dev": "nest start --watch",
     "start": "node dist/main.js",
@@ -50,11 +51,13 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@nestjs/cli": "^11.0.24",
+    "@swc/core": "^1.16.2",
     "@types/bcrypt": "^6.0.0",
     "@types/express": "^5.0.6",
     "@types/node": "^25.9.2",
     "@types/passport-jwt": "^4.0.1",
     "@types/pg": "^8.20.0",
+    "@vitest/coverage-v8": "^5.0.1",
     "dotenv": "^17.4.2",
     "eslint": "^10.10.0",
     "eslint-config-prettier": "^10.1.8",
@@ -65,7 +68,9 @@
     "prisma": "^7.8.0",
     "tsx": "^4.23.13",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.70.0"
+    "typescript-eslint": "^8.70.0",
+    "unplugin-swc": "^1.6.0",
+    "vitest": "^5.0.1"
   },
   "overrides": {
     "pino-http": {
